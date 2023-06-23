@@ -59,7 +59,8 @@ public class MyController : Controller {
                 mesage = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            command.CommandText = $"insert into lote (idlugarenvio) values ('{arg.Element.Deposit}')";
+            command.CommandText = @$"insert into lote (idlugarenvio, estado, fechaestimada) 
+                values ('{arg.Element.Deposit}', '{arg.Element.State}', '{arg.Element.EstimatedDate}')";
             command.ExecuteNonQuery();
             return new {
                 success = true,

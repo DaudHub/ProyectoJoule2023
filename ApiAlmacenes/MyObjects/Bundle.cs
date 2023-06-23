@@ -5,5 +5,9 @@ namespace ApiAlmacenes {
 
         public int Deposit { get; set; }
 
+        public string State { get; set; }
+
+        public string EstimatedDate { get; set; }
+
     }
 }
