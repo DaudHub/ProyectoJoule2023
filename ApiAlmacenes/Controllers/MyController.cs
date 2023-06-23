@@ -17,25 +17,21 @@ public class MyController : Controller {
     public dynamic CreatePackage([FromBody] VerifCouple<Package> arg) {
         try {
             db_conn.Open();
+            if (!VerifyCredentials(arg.Credentials)) return new {
+                success = false,
+                message = "verification error"
+            };
             MySqlCommand command = new (null, db_conn);
-            command.CommandText = 
-            @$"select sys.sysusers.username, rol 
-            from sys.sysusers inner join sys.tokens on sys.sysusers.username=sys.tokens.username 
-            where token='{arg.Credentials.Token}' and passwd='{MyEncryption.EncryptToString(arg.Credentials.Password)}'";
-            var reader = command.ExecuteReader();
-            if (!reader.HasRows) return new {
-                success = false,
-                message = "verification error"
-            };
-            if (reader.Read() && reader.GetString(1) != "almacenero") return new {
-                success = false,
-                message = "verification error"
-            };
-            reader.Close();
-            command.CommandText = @$"insert into sys.paquete (comentarios, pesokg, volumen, ci) 
-            values ('{arg.Element.Comments}', '{arg.Element.Weight_Kg}', '{arg.Element.Volume_m2}', '{arg.Element.Customer}')";
+            command.CommandText = @$"insert into sys.paquete (comentarios, pesokg, volumen, ci, precio) 
+            values ('{arg.Element.Comments}', '{arg.Element.Weight_Kg}', '{arg.Element.Volume_m3}', '{arg.Element.Customer}', '{arg.Element.Price}')";
             command.ExecuteNonQuery();
             foreach (var item in arg.Element.Characteristics) {
+                command.CommandText = $"select nombre from caracteristicas";
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                    if (reader.GetString(0) == item)
+                        arg.Element.Characteristics.Add(item);
+                reader.Close();
                 command.CommandText = $"insert into sys.caracteristicaspaquete values ('{arg.Element.Customer}','{item}')";
                 command.ExecuteNonQuery();
             }
@@ -51,6 +47,55 @@ public class MyController : Controller {
                 exception = e.ToString()
             };
         } finally {
+            db_conn.Close();
+        }
+    }
+
+    public dynamic CreateBundle(VerifCouple<Bundle> arg) {
+        try{
+            db_conn.Open();
+            if (!VerifyCredentials(arg.Credentials)) return new {
+                success = false,
+                mesage = "authentication error"
+            };
+            MySqlCommand command = new (null, db_conn);
+            command.CommandText = $"insert into lote (idlugarenvio) values ('{arg.Element.Deposit}')";
+            command.ExecuteNonQuery();
+            return new {
+                success = true,
+                message = "bundle created successfully"
+            };
+        }
+        catch(Exception e){
+            return new {
+                success = false,
+                message = "error while creating bundle",
+                exception = e.ToString()
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
+
+    private bool VerifyCredentials(Verification ver) {
+        try {
+            db_conn.Open();
+            MySqlCommand command = new (null, db_conn);
+            command.CommandText = 
+            @$"select sys.sysusers.username, rol 
+            from sys.sysusers inner join sys.tokens on sys.sysusers.username=sys.tokens.username 
+            where token='{ver.Token}' and passwd='{MyEncryption.EncryptToString(ver.Password)}'";
+            var reader = command.ExecuteReader();
+            if (!reader.HasRows) return false;
+            if (reader.Read() && reader.GetString(1) != "almacenero") return false;
+            reader.Close();
+            return true;
+        }
+        catch(Exception) {
+            return false;
+        }
+        finally {
             db_conn.Close();
         }
     }

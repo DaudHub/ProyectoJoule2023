@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "swayml6zyKBJUV3B/E6QZ/6aVx4kdcLGy9sZUVlsJK0Jhf16RiVl1YvW4lNbgGM8vK2/6WYlnzOV7y1q99HFPw==",
+  "dgSpecHash": "344kZOrK3rBg8BuDansxDSbuOerTtP9XpriSlSx6mh+c5W4iQZ3jg39aoc0d4uf1D+yu0JB8HmXeJjHoiYXbwA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj",
+  "projectFilePath": "/home/mdaud/Repos/ProyectoJoule2023/ApiAlmacenes/ApiAlmacenes.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\mateo\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512"
+    "/home/mdaud/.nuget/packages/mysqlconnector/2.2.6/mysqlconnector.2.2.6.nupkg.sha512"
   ],
   "logs": []
 }
