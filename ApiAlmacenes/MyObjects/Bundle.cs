@@ -7,7 +7,5 @@ namespace ApiAlmacenes {
 
         public string State { get; set; }
 
-        public string EstimatedDate { get; set; }
-
     }
 }

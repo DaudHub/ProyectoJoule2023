@@ -51,6 +51,8 @@ public class MyController : Controller {
         }
     }
 
+    [HttpPost]
+    [Route("newbundle")]
     public dynamic CreateBundle(VerifCouple<Bundle> arg) {
         try{
             db_conn.Open();
@@ -60,7 +62,7 @@ public class MyController : Controller {
             };
             MySqlCommand command = new (null, db_conn);
             command.CommandText = @$"insert into lote (idlugarenvio, estado, fechaestimada) 
-                values ('{arg.Element.Deposit}', '{arg.Element.State}', '{arg.Element.EstimatedDate}')";
+                values ('{arg.Element.Deposit}', '{arg.Element.State}')";
             command.ExecuteNonQuery();
             return new {
                 success = true,
@@ -79,6 +81,27 @@ public class MyController : Controller {
         }
     }
 
+    [HttpPost]
+    [Route("assignpackage")]
+    public dynamic AssignPackage(VerifTriangle<Package,Bundle> arg) {
+        try {
+            db_conn.Open();
+            return new {
+                success = true,
+                message = "package {} successfully assigned to bundle {}"
+            };
+        }
+        catch(Exception e) {
+            return new {
+                success = false,
+                message = "error while assigning package",
+                exception = e.ToString()
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
     private bool VerifyCredentials(Verification ver) {
         try {
             db_conn.Open();
