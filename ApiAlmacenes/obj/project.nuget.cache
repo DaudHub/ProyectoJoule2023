@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "344kZOrK3rBg8BuDansxDSbuOerTtP9XpriSlSx6mh+c5W4iQZ3jg39aoc0d4uf1D+yu0JB8HmXeJjHoiYXbwA==",
+  "dgSpecHash": "rlOvjofvTeA5vHIGkkN4JeBo4gOUQqLRlbcumhDF+dq+U13XWFo/XzkA9MfZtPyKOQZIkrK3hk5DhLLldlW2WQ==",
   "success": true,
-  "projectFilePath": "/home/mdaud/Repos/ProyectoJoule2023/ApiAlmacenes/ApiAlmacenes.csproj",
+  "projectFilePath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj",
   "expectedPackageFiles": [
-    "/home/mdaud/.nuget/packages/mysqlconnector/2.2.6/mysqlconnector.2.2.6.nupkg.sha512"
+    "C:\\Users\\mateo\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.2\\microsoft.netcore.app.ref.7.0.2.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.2\\microsoft.windowsdesktop.app.ref.7.0.2.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.2\\microsoft.aspnetcore.app.ref.7.0.2.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.2\\microsoft.netcore.app.host.win-x64.7.0.2.nupkg.sha512"
   ],
   "logs": []
 }

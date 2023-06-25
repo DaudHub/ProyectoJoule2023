@@ -53,7 +53,7 @@ public class MyController : Controller {
 
     [HttpPost]
     [Route("newbundle")]
-    public dynamic CreateBundle(VerifCouple<Bundle> arg) {
+    public dynamic CreateBundle([FromBody] VerifCouple<Bundle> arg) {
         try{
             db_conn.Open();
             if (!VerifyCredentials(arg.Credentials)) return new {
@@ -83,12 +83,18 @@ public class MyController : Controller {
 
     [HttpPost]
     [Route("assignpackage")]
-    public dynamic AssignPackage(VerifTriangle<Package,Bundle> arg) {
+    public dynamic AssignPackage([FromBody] VerifTriangle<Bundle,Package> arg) {
         try {
             db_conn.Open();
+            MySqlCommand command = new (null, db_conn);
+            if (!VerifyCredentials(arg.Credentials)) return new {
+                success = false,
+                message = "verification error"
+            };
+            command.CommandText = @$"insert into paquetelote values ({arg.Element1.ID},{arg.Element2.ID})";
             return new {
                 success = true,
-                message = "package {} successfully assigned to bundle {}"
+                message = $"package {arg.Element2.ID} successfully assigned to bundle {arg.Element1.ID}"
             };
         }
         catch(Exception e) {
@@ -102,6 +108,7 @@ public class MyController : Controller {
             db_conn.Close();
         }
     }
+
     private bool VerifyCredentials(Verification ver) {
         try {
             db_conn.Open();
