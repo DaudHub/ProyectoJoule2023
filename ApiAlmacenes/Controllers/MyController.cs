@@ -114,9 +114,9 @@ public class MyController : Controller {
             db_conn.Open();
             MySqlCommand command = new (null, db_conn);
             command.CommandText = 
-            @$"select sys.sysusers.username, rol 
-            from sys.sysusers inner join sys.tokens on sys.sysusers.username=sys.tokens.username 
-            where token='{ver.Token}' and passwd='{MyEncryption.EncryptToString(ver.Password)}'";
+            @$"select proyecto.usuarios.usuario, rol 
+            from sys.sysusers inner join proyecto.tokens on proyecto.usuarios.usuario=proyecto.tokens.usuario 
+            where token='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
             if (reader.Read() && reader.GetString(1) != "almacenero") return false;
