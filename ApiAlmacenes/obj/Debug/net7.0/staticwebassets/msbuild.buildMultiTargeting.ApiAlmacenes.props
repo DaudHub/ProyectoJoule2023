@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../build/ApiAlmacenes.props" />
+  <Import Project="..\build\ApiAlmacenes.props" />
 </Project>

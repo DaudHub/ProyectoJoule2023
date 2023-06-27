@@ -4,13 +4,14 @@ using ApiAlmacenes.Models;
 using MySqlConnector;
 using ApiAlmacenes;
 using Microsoft.VisualBasic;
+using System.Data;
 
 namespace ApiAlmacenes.Controllers;
 
 [ApiController]
 public class MyController : Controller {
 
-    public MySqlConnection db_conn = new ("Server=127.0.0.1;User ID=adminAlmacen;Password=urbgieubgiutg98rtygtgiurnindg8958y");
+    public MySqlConnection db_conn = new ("Server=127.0.0.1;User ID=apialmacen;Password=urbgieubgiutg98rtygtgiurnindg8958y;Database=proyecto");
 
     [HttpPost]
     [Route("newpackage")]
@@ -19,11 +20,11 @@ public class MyController : Controller {
             db_conn.Open();
             if (!VerifyCredentials(arg.Credentials)) return new {
                 success = false,
-                message = "verification error"
+                message = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            command.CommandText = @$"insert into sys.paquete (comentarios, pesokg, volumen, ci, precio) 
-            values ('{arg.Element.Comments}', '{arg.Element.Weight_Kg}', '{arg.Element.Volume_m3}', '{arg.Element.Customer}', '{arg.Element.Price}')";
+            command.CommandText = @$"insert into proyecto.paquete (comentarios, pesokg, volumen, ci) 
+            values ('{arg.Element.Comments}', '{arg.Element.Weight_Kg}', '{arg.Element.Volume_m3}', '{arg.Element.Customer}')";
             command.ExecuteNonQuery();
             foreach (var item in arg.Element.Characteristics) {
                 command.CommandText = $"select nombre from caracteristicas";
@@ -32,12 +33,12 @@ public class MyController : Controller {
                     if (reader.GetString(0) == item)
                         arg.Element.Characteristics.Add(item);
                 reader.Close();
-                command.CommandText = $"insert into sys.caracteristicaspaquete values ('{arg.Element.Customer}','{item}')";
+                command.CommandText = $"insert into proyecto.caracteristicaspaquete values ('{arg.Element.Customer}','{item}')";
                 command.ExecuteNonQuery();
             }
             return new {
                 success = true,
-                message = "package created successfully"
+                message = "package created successfully",
             };
         }
         catch (Exception e) {
@@ -47,6 +48,47 @@ public class MyController : Controller {
                 exception = e.ToString()
             };
         } finally {
+            db_conn.Close();
+        }
+    }
+    
+    [HttpGet]
+    [Route("getpackage")]
+    public dynamic GetPackageByID([FromBody] VerifCouple<int> arg) {
+        try {
+            db_conn.Open();
+            MySqlCommand command = new (null, db_conn);
+            Package package = new ();
+            command.CommandText= $@"select * from caracteristicaspaquete where idpaquete={arg.Element}";
+            var reader = command.ExecuteReader();
+            while (reader.Read()){
+                for (int i = 0; i < reader.FieldCount; i++) {
+                    package.Characteristics.Add(reader.GetString(i));
+                }
+            }
+            reader.Close();
+            command.CommandText = $@"select comentarios, pesokg, volumen, ci from paquete where idpaquete={arg.Element}";
+            reader = command.ExecuteReader();
+            reader.Read();
+            if (!reader.HasRows) return new {
+                success = false,
+                message = "non-existing package"
+            };
+            package.ID = arg.Element;
+            package.Comments = reader.GetString(0);
+            package.Weight_Kg = (decimal) reader.GetValue(1);
+            package.Volume_m3 = (decimal) reader.GetValue(2);
+            package.Customer = (int) reader.GetValue(3);
+            return package;
+        }
+        catch (Exception e) {
+            return new {
+                success = false,
+                message = "error while retrieving package",
+                exception = e.ToString()
+            };
+        }
+        finally {
             db_conn.Close();
         }
     }
@@ -111,23 +153,23 @@ public class MyController : Controller {
 
     private bool VerifyCredentials(Verification ver) {
         try {
-            db_conn.Open();
+            if (db_conn.State == ConnectionState.Closed) 
+                db_conn.Open();
             MySqlCommand command = new (null, db_conn);
             command.CommandText = 
             @$"select proyecto.usuarios.usuario, rol 
-            from sys.sysusers inner join proyecto.tokens on proyecto.usuarios.usuario=proyecto.tokens.usuario 
+            from proyecto.usuarios inner join proyecto.tokens on proyecto.usuarios.usuario=proyecto.tokens.usuario 
             where token='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
-            if (reader.Read() && reader.GetString(1) != "almacenero") return false;
+            while (reader.Read()) {
+                if (reader.GetString(1) != "almacenero" && reader.GetString(1) != "admin") return false;
+            }
             reader.Close();
             return true;
         }
         catch(Exception) {
-            return false;
-        }
-        finally {
-            db_conn.Close();
+            throw;
         }
     }
 }
