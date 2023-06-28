@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj": {}
+    "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj": {
+    "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj",
+        "projectUniqueName": "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj",
         "projectName": "ApiAlmacenes",
-        "projectPath": "C:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj",
+        "projectPath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj",
         "packagesPath": "C:\\Users\\mateo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\obj\\",
+        "outputPath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

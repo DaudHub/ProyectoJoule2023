@@ -23,8 +23,8 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            command.CommandText = @$"insert into proyecto.paquete (comentarios, pesokg, volumen, ci) 
-            values ('{arg.Element.Comments}', '{arg.Element.Weight_Kg}', '{arg.Element.Volume_m3}', '{arg.Element.Customer}')";
+            command.CommandText = @$"insert into proyecto.paquete (idpaquete, comentarios, pesokg, volumen, ci) 
+            values ({arg.Element.ID},'{arg.Element.Comments}', {arg.Element.Weight_Kg}, {arg.Element.Volume_m3}, {arg.Element.Customer})";
             command.ExecuteNonQuery();
             foreach (var item in arg.Element.Characteristics) {
                 command.CommandText = $"select nombre from caracteristicas";
@@ -103,8 +103,8 @@ public class MyController : Controller {
                 mesage = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            command.CommandText = @$"insert into lote (idlugarenvio, estado, fechaestimada) 
-                values ('{arg.Element.Deposit}', '{arg.Element.State}')";
+            command.CommandText = @$"insert into lote (idlote, idlugarenvio)
+                values ({arg.Element.ID}, {arg.Element.Deposit})";
             command.ExecuteNonQuery();
             return new {
                 success = true,
