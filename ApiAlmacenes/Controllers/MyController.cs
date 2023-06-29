@@ -5,6 +5,7 @@ using MySqlConnector;
 using ApiAlmacenes;
 using Microsoft.VisualBasic;
 using System.Data;
+using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace ApiAlmacenes.Controllers;
 
@@ -51,6 +52,10 @@ public class MyController : Controller {
     public dynamic GetPackageByID([FromBody] VerifCouple<int> arg) {
         try {
             db_conn.Open();
+            if (!VerifyCredentials(arg.Credentials)) return new {
+                success = false,
+                message = "authentication error"
+            };
             MySqlCommand command = new (null, db_conn);
             Package package = new ();
             command.CommandText= $@"select * from caracteristicaspaquete where idpaquete={arg.Element}";
@@ -125,9 +130,10 @@ public class MyController : Controller {
             MySqlCommand command = new (null, db_conn);
             if (!VerifyCredentials(arg.Credentials)) return new {
                 success = false,
-                message = "verification error"
+                message = "authentication error"
             };
             command.CommandText = @$"insert into paquetelote values ({arg.Element1.ID},{arg.Element2.ID})";
+            command.ExecuteNonQuery();
             return new {
                 success = true,
                 message = $"package {arg.Element2.ID} successfully assigned to bundle {arg.Element1.ID}"
@@ -137,6 +143,36 @@ public class MyController : Controller {
             return new {
                 success = false,
                 message = "error while assigning package",
+                exception = e.ToString()
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
+
+    [HttpPost]
+    [Route("loadbundle")]
+    public dynamic LoadBundle(VerifCouple<Load> arg) {
+        try{
+            db_conn.Open();
+            if (!VerifyCredentials(arg.Credentials)) return new {
+                success = false,
+                message = "authentication error"
+            };
+            MySqlCommand command = new (null, db_conn);
+            command.CommandText = @$"insert into cargalote
+                values ({arg.Element.Bundle}, '{arg.Element.Plate}', '{arg.Element.User}','{arg.Element.Departure_Date}')";
+            command.ExecuteNonQuery();
+            return new {
+                success = true,
+                message = "bundle loaded successfully"
+            };
+        }
+        catch(Exception e) {
+            return new {
+                success = false,
+                message = "failed to load bundle",
                 exception = e.ToString()
             };
         }
