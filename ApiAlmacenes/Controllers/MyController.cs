@@ -23,17 +23,11 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            command.CommandText = @$"insert into proyecto.paquete (idpaquete, comentarios, pesokg, volumen, ci) 
-            values ({arg.Element.ID},'{arg.Element.Comments}', {arg.Element.Weight_Kg}, {arg.Element.Volume_m3}, {arg.Element.Customer})";
+            command.CommandText = @$"insert into proyecto.paquete (idpaquete, comentarios, pesokg, volumen, usuario)
+                values ({arg.Element.ID},'{arg.Element.Comments}', {arg.Element.Weight_Kg}, {arg.Element.Volume_m3}, {arg.Element.User})";
             command.ExecuteNonQuery();
-            foreach (var item in arg.Element.Characteristics) {
-                command.CommandText = $"select nombre from caracteristicas";
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                    if (reader.GetString(0) == item)
-                        arg.Element.Characteristics.Add(item);
-                reader.Close();
-                command.CommandText = $"insert into proyecto.caracteristicaspaquete values ('{arg.Element.Customer}','{item}')";
+            foreach (var characteristic in arg.Element.Characteristics) {
+                command.CommandText = $"insert into proyecto.caracteristicaspaquete values ('{arg.Element.ID}','{characteristic}')";
                 command.ExecuteNonQuery();
             }
             return new {
@@ -67,7 +61,7 @@ public class MyController : Controller {
                 }
             }
             reader.Close();
-            command.CommandText = $@"select comentarios, pesokg, volumen, ci from paquete where idpaquete={arg.Element}";
+            command.CommandText = $@"select comentarios, pesokg, volumen, usuario from paquete where idpaquete={arg.Element}";
             reader = command.ExecuteReader();
             reader.Read();
             if (!reader.HasRows) return new {
@@ -78,7 +72,7 @@ public class MyController : Controller {
             package.Comments = reader.GetString(0);
             package.Weight_Kg = (decimal) reader.GetValue(1);
             package.Volume_m3 = (decimal) reader.GetValue(2);
-            package.Customer = (int) reader.GetValue(3);
+            package.User = reader.GetString(3);
             return package;
         }
         catch (Exception e) {

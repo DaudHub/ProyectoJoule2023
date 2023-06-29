@@ -11,7 +11,7 @@ namespace ApiAlmacenes {
 
         public decimal Volume_m3 { get; set; }
 
-        public int Customer { get; set; }
+        public string User { get; set; }
 
     }
 }
