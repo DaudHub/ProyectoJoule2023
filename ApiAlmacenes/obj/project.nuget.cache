@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rlOvjofvTeA5vHIGkkN4JeBo4gOUQqLRlbcumhDF+dq+U13XWFo/XzkA9MfZtPyKOQZIkrK3hk5DhLLldlW2WQ==",
+  "dgSpecHash": "7z702H+y3cB4ae8K//Nx+df2lQZIPazVulv1Q5IAEHXPandAsT8afuOyX9Ek8O6GWypOMUNDka3+eA67w9UrIw==",
   "success": true,
-  "projectFilePath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj",
+  "projectFilePath": "C:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAlmacenes\\ApiAlmacenes.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateo\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512",
     "C:\\Users\\mateo\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.2\\microsoft.netcore.app.ref.7.0.2.nupkg.sha512",
