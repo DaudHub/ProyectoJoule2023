@@ -25,7 +25,7 @@ public class MyController : Controller {
             };
             MySqlCommand command = new (null, db_conn);
             command.CommandText = @$"insert into proyecto.paquete (idpaquete, comentarios, pesokg, volumen, usuario)
-                values ({arg.Element.ID},'{arg.Element.Comments}', {arg.Element.Weight_Kg}, {arg.Element.Volume_m3}, {arg.Element.User})";
+                values ({arg.Element.ID},'{arg.Element.Comments}', {arg.Element.Weight_Kg}, {arg.Element.Volume_m3}, '{arg.Element.User}')";
             command.ExecuteNonQuery();
             foreach (var characteristic in arg.Element.Characteristics) {
                 command.CommandText = $"insert into proyecto.caracteristicaspaquete values ('{arg.Element.ID}','{characteristic}')";
@@ -123,8 +123,37 @@ public class MyController : Controller {
     }
 
     [HttpPost]
+    [Route("checkin")]
+    public dynamic CheckInBundle(VerifCouple<CheckIn> arg) {
+        try {
+            db_conn.Open();
+            if (!VerifyCredentials(arg.Credentials)) return new {
+                success = false,
+                message = "authentication error"
+            };
+            MySqlCommand command = new (null, db_conn);
+            command.CommandText = $"update lote set idlugarenvio={arg.Element.DepositID} where idlote={arg.Element.BundleID}";
+            command.ExecuteNonQuery();
+            return new {
+                success = true,
+                message = "bundle checked in successfully"
+            };
+        }
+        catch (Exception e) {
+            return new {
+                success = false,
+                message = "error while checking in package",
+                exception = e.ToString()
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
+
+    [HttpPost]
     [Route("assignpackage")]
-    public dynamic AssignPackage([FromBody] VerifTriangle<Bundle,Package> arg) {
+    public dynamic AssignPackage([FromBody] VerifCouple<BundlePackage> arg) {
         try {
             db_conn.Open();
             MySqlCommand command = new (null, db_conn);
@@ -132,11 +161,11 @@ public class MyController : Controller {
                 success = false,
                 message = "authentication error"
             };
-            command.CommandText = @$"insert into paquetelote values ({arg.Element1.ID},{arg.Element2.ID})";
+            command.CommandText = @$"insert into paquetelote values ({arg.Element.BundleID},{arg.Element.PackageID})";
             command.ExecuteNonQuery();
             return new {
                 success = true,
-                message = $"package {arg.Element2.ID} successfully assigned to bundle {arg.Element1.ID}"
+                message = $"package {arg.Element.PackageID} successfully assigned to bundle {arg.Element.BundleID}"
             };
         }
         catch(Exception e) {
