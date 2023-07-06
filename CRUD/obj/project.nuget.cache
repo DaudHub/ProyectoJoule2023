@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "YrCH6RPGbb0HLu5UUnbBWIbqyYusw0MaKpl5prEC5oWw1ifCvLsJnXy+4wfIHUUpabyJ9yfKEknnQ7OmkYyZDQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\CRUD\\CRUD.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mateo\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512"
+  ],
+  "logs": []
+}
