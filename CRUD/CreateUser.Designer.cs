@@ -1,6 +1,6 @@
 ﻿namespace CRUD
 {
-    partial class Form2
+    partial class CreateUser
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateUser));
             panel1 = new Panel();
-            button5 = new Button();
-            button3 = new Button();
-            button2 = new Button();
+            btnVolver = new Button();
+            btnMinimizar = new Button();
+            btnCerrar = new Button();
             label1 = new Label();
             pictureBox1 = new PictureBox();
             label2 = new Label();
@@ -40,64 +40,64 @@
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
-            textBox1 = new TextBox();
-            comboBox1 = new ComboBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            pictureBox2 = new PictureBox();
-            button1 = new Button();
+            txtUsuario = new TextBox();
+            cbxRol = new ComboBox();
+            txtContrasena = new TextBox();
+            txtNombre = new TextBox();
+            txtApellido = new TextBox();
+            pbxVer = new PictureBox();
+            btnCrear = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbxVer).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.Black;
-            panel1.Controls.Add(button5);
-            panel1.Controls.Add(button3);
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(btnVolver);
+            panel1.Controls.Add(btnMinimizar);
+            panel1.Controls.Add(btnCerrar);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(1, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(603, 87);
             panel1.TabIndex = 1;
             // 
-            // button5
+            // btnVolver
             // 
-            button5.BackColor = Color.LightSalmon;
-            button5.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            button5.Location = new Point(0, 0);
-            button5.Name = "button5";
-            button5.Size = new Size(60, 37);
-            button5.TabIndex = 32;
-            button5.Text = "←";
-            button5.UseVisualStyleBackColor = false;
-            button5.Click += button5_Click;
+            btnVolver.BackColor = Color.LightSalmon;
+            btnVolver.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnVolver.Location = new Point(0, 0);
+            btnVolver.Name = "btnVolver";
+            btnVolver.Size = new Size(60, 37);
+            btnVolver.TabIndex = 32;
+            btnVolver.Text = "←";
+            btnVolver.UseVisualStyleBackColor = false;
+            btnVolver.Click += btnVolver_Click;
             // 
-            // button3
+            // btnMinimizar
             // 
-            button3.BackColor = Color.Yellow;
-            button3.Location = new Point(523, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(34, 21);
-            button3.TabIndex = 18;
-            button3.Text = "-";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
+            btnMinimizar.BackColor = Color.Yellow;
+            btnMinimizar.Location = new Point(523, 3);
+            btnMinimizar.Name = "btnMinimizar";
+            btnMinimizar.Size = new Size(34, 21);
+            btnMinimizar.TabIndex = 18;
+            btnMinimizar.Text = "-";
+            btnMinimizar.UseVisualStyleBackColor = false;
+            btnMinimizar.Click += btnMinimizar_Click;
             // 
-            // button2
+            // btnCerrar
             // 
-            button2.BackColor = Color.IndianRed;
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(563, 3);
-            button2.Name = "button2";
-            button2.Size = new Size(34, 21);
-            button2.TabIndex = 17;
-            button2.Text = "X";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            btnCerrar.BackColor = Color.IndianRed;
+            btnCerrar.ForeColor = Color.White;
+            btnCerrar.Location = new Point(563, 3);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(34, 21);
+            btnCerrar.TabIndex = 17;
+            btnCerrar.Text = "X";
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // label1
             // 
@@ -176,74 +176,79 @@
             label6.TabIndex = 7;
             label6.Text = "Apellido:";
             // 
-            // textBox1
+            // txtUsuario
             // 
-            textBox1.Location = new Point(393, 157);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 8;
+            txtUsuario.Location = new Point(393, 157);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Size = new Size(100, 23);
+            txtUsuario.TabIndex = 8;
             // 
-            // comboBox1
+            // cbxRol
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(354, 232);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 9;
+            cbxRol.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxRol.FormattingEnabled = true;
+            cbxRol.Items.AddRange(new object[] { "admin", "almacenero", "camionero", "cliente" });
+            cbxRol.Location = new Point(354, 232);
+            cbxRol.Name = "cbxRol";
+            cbxRol.Size = new Size(121, 23);
+            cbxRol.TabIndex = 9;
             // 
-            // textBox2
+            // txtContrasena
             // 
-            textBox2.Location = new Point(422, 194);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 10;
+            txtContrasena.Location = new Point(422, 194);
+            txtContrasena.Name = "txtContrasena";
+            txtContrasena.Size = new Size(100, 23);
+            txtContrasena.TabIndex = 10;
+            txtContrasena.UseSystemPasswordChar = true;
             // 
-            // textBox3
+            // txtNombre
             // 
-            textBox3.Location = new Point(393, 267);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(100, 23);
-            textBox3.TabIndex = 11;
+            txtNombre.Location = new Point(393, 267);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(100, 23);
+            txtNombre.TabIndex = 11;
             // 
-            // textBox4
+            // txtApellido
             // 
-            textBox4.Location = new Point(393, 303);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 12;
+            txtApellido.Location = new Point(393, 303);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(100, 23);
+            txtApellido.TabIndex = 12;
             // 
-            // pictureBox2
+            // pbxVer
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(528, 184);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(47, 40);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 13;
-            pictureBox2.TabStop = false;
+            pbxVer.Image = (Image)resources.GetObject("pbxVer.Image");
+            pbxVer.Location = new Point(528, 184);
+            pbxVer.Name = "pbxVer";
+            pbxVer.Size = new Size(47, 40);
+            pbxVer.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbxVer.TabIndex = 13;
+            pbxVer.TabStop = false;
+            pbxVer.Click += pbxVer_Click;
             // 
-            // button1
+            // btnCrear
             // 
-            button1.Location = new Point(382, 361);
-            button1.Name = "button1";
-            button1.Size = new Size(93, 42);
-            button1.TabIndex = 16;
-            button1.Text = "CREAR";
-            button1.UseVisualStyleBackColor = true;
+            btnCrear.Location = new Point(382, 361);
+            btnCrear.Name = "btnCrear";
+            btnCrear.Size = new Size(93, 42);
+            btnCrear.TabIndex = 16;
+            btnCrear.Text = "CREAR";
+            btnCrear.UseVisualStyleBackColor = true;
+            btnCrear.Click += btnCrear_Click;
             // 
-            // Form2
+            // CreateUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(602, 427);
             ControlBox = false;
-            Controls.Add(button1);
-            Controls.Add(pictureBox2);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(comboBox1);
-            Controls.Add(textBox1);
+            Controls.Add(btnCrear);
+            Controls.Add(pbxVer);
+            Controls.Add(txtApellido);
+            Controls.Add(txtNombre);
+            Controls.Add(txtContrasena);
+            Controls.Add(cbxRol);
+            Controls.Add(txtUsuario);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -251,13 +256,13 @@
             Controls.Add(label2);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);
-            Name = "Form2";
+            Name = "CreateUser";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CREAR";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbxVer).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -272,15 +277,15 @@
         private Label label4;
         private Label label5;
         private Label label6;
-        private TextBox textBox1;
-        private ComboBox comboBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private PictureBox pictureBox2;
-        private Button button1;
-        private Button button3;
-        private Button button2;
-        private Button button5;
+        private TextBox txtUsuario;
+        private ComboBox cbxRol;
+        private TextBox txtContrasena;
+        private TextBox txtNombre;
+        private TextBox txtApellido;
+        private PictureBox pbxVer;
+        private Button btnCrear;
+        private Button btnMinimizar;
+        private Button btnCerrar;
+        private Button btnVolver;
     }
 }

@@ -1,8 +1,8 @@
 namespace CRUD
 {
-    public partial class Form1 : Form
+    public partial class UserMenu : Form
     {
-        public Form1()
+        public UserMenu()
         {
             InitializeComponent();
         }
@@ -10,19 +10,19 @@ namespace CRUD
         private void button1_Click(object sender, EventArgs e)
         {
             Hide();
-            new Form2().Show();
+            new CreateUser().Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             Hide();
-            new Form3().Show();
+            new DeleteUser().Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             Hide();
-            new Form4().Show();
+            new EditUser().Show();
         }
 
         private void button5_Click(object sender, EventArgs e)

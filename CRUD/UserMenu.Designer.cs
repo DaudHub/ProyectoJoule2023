@@ -1,6 +1,6 @@
 ﻿namespace CRUD
 {
-    partial class Form1
+    partial class UserMenu
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserMenu));
             panel1 = new Panel();
             button4 = new Button();
             button5 = new Button();

@@ -1,6 +1,6 @@
 ﻿namespace CRUD
 {
-    partial class Form3
+    partial class DeleteUser
     {
         /// <summary>
         /// Required designer variable.
@@ -28,37 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeleteUser));
+            txtContrasena = new TextBox();
+            txtUsuario = new TextBox();
             label3 = new Label();
             label2 = new Label();
             pictureBox1 = new PictureBox();
-            button1 = new Button();
+            btnEliminar = new Button();
             panel1 = new Panel();
             button5 = new Button();
             button3 = new Button();
             button2 = new Button();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
+            pbxVer = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbxVer).BeginInit();
             SuspendLayout();
             // 
-            // textBox2
+            // txtContrasena
             // 
-            textBox2.Location = new Point(138, 253);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 23;
+            txtContrasena.Location = new Point(138, 253);
+            txtContrasena.Name = "txtContrasena";
+            txtContrasena.Size = new Size(100, 23);
+            txtContrasena.TabIndex = 23;
+            txtContrasena.UseSystemPasswordChar = true;
             // 
-            // textBox1
+            // txtUsuario
             // 
-            textBox1.Location = new Point(109, 216);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 21;
+            txtUsuario.Location = new Point(109, 216);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Size = new Size(100, 23);
+            txtUsuario.TabIndex = 21;
             // 
             // label3
             // 
@@ -92,14 +93,15 @@
             pictureBox1.TabIndex = 16;
             pictureBox1.TabStop = false;
             // 
-            // button1
+            // btnEliminar
             // 
-            button1.Location = new Point(92, 361);
-            button1.Name = "button1";
-            button1.Size = new Size(93, 42);
-            button1.TabIndex = 15;
-            button1.Text = "ELIMINAR";
-            button1.UseVisualStyleBackColor = true;
+            btnEliminar.Location = new Point(92, 361);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(93, 42);
+            btnEliminar.TabIndex = 15;
+            btnEliminar.Text = "ELIMINAR";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // panel1
             // 
@@ -160,51 +162,52 @@
             label1.TabIndex = 1;
             label1.Text = "ELIMINAR USUARIO";
             // 
-            // pictureBox2
+            // pbxVer
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(244, 242);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(49, 48);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 24;
-            pictureBox2.TabStop = false;
+            pbxVer.Image = (Image)resources.GetObject("pbxVer.Image");
+            pbxVer.Location = new Point(244, 242);
+            pbxVer.Name = "pbxVer";
+            pbxVer.Size = new Size(49, 48);
+            pbxVer.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbxVer.TabIndex = 24;
+            pbxVer.TabStop = false;
+            pbxVer.Click += pbxVer_Click;
             // 
-            // Form3
+            // DeleteUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(602, 427);
             ControlBox = false;
-            Controls.Add(pictureBox2);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(pbxVer);
+            Controls.Add(txtContrasena);
+            Controls.Add(txtUsuario);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
-            Controls.Add(button1);
+            Controls.Add(btnEliminar);
             Controls.Add(panel1);
-            Name = "Form3";
+            Name = "DeleteUser";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form3";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbxVer).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private TextBox txtContrasena;
+        private TextBox txtUsuario;
         private Label label3;
         private Label label2;
         private PictureBox pictureBox1;
-        private Button button1;
+        private Button btnEliminar;
         private Panel panel1;
         private Label label1;
-        private PictureBox pictureBox2;
+        private PictureBox pbxVer;
         private Button button3;
         private Button button2;
         private Button button5;

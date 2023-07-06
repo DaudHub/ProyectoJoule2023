@@ -1,6 +1,6 @@
 ﻿namespace CRUD
 {
-    partial class Form4
+    partial class EditUser
     {
         /// <summary>
         /// Required designer variable.
@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form4));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditUser));
             panel1 = new Panel();
             button5 = new Button();
             button3 = new Button();
             button4 = new Button();
             label1 = new Label();
             panel2 = new Panel();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            txtContrasena = new TextBox();
+            txtUsuarioNuevo = new TextBox();
+            txtUsuarioViejo = new TextBox();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
             label2 = new Label();
-            button1 = new Button();
+            btnModificarUsuario = new Button();
             panel3 = new Panel();
-            textBox4 = new TextBox();
+            txtContrasenaNueva = new TextBox();
             label3 = new Label();
-            textBox5 = new TextBox();
-            button2 = new Button();
-            textBox6 = new TextBox();
+            txtContrasenaVieja = new TextBox();
+            btnModificarContrasena = new Button();
+            txtUsuario = new TextBox();
             label8 = new Label();
             label7 = new Label();
             label9 = new Label();
@@ -120,39 +120,39 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(textBox3);
-            panel2.Controls.Add(textBox2);
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(txtContrasena);
+            panel2.Controls.Add(txtUsuarioNuevo);
+            panel2.Controls.Add(txtUsuarioViejo);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(button1);
+            panel2.Controls.Add(btnModificarUsuario);
             panel2.Location = new Point(27, 95);
             panel2.Name = "panel2";
             panel2.Size = new Size(329, 165);
             panel2.TabIndex = 26;
             // 
-            // textBox3
+            // txtContrasena
             // 
-            textBox3.Location = new Point(150, 97);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(100, 23);
-            textBox3.TabIndex = 31;
+            txtContrasena.Location = new Point(150, 97);
+            txtContrasena.Name = "txtContrasena";
+            txtContrasena.Size = new Size(100, 23);
+            txtContrasena.TabIndex = 31;
             // 
-            // textBox2
+            // txtUsuarioNuevo
             // 
-            textBox2.Location = new Point(150, 63);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 30;
+            txtUsuarioNuevo.Location = new Point(150, 63);
+            txtUsuarioNuevo.Name = "txtUsuarioNuevo";
+            txtUsuarioNuevo.Size = new Size(100, 23);
+            txtUsuarioNuevo.TabIndex = 30;
             // 
-            // textBox1
+            // txtUsuarioViejo
             // 
-            textBox1.Location = new Point(150, 34);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 29;
+            txtUsuarioViejo.Location = new Point(150, 34);
+            txtUsuarioViejo.Name = "txtUsuarioViejo";
+            txtUsuarioViejo.Size = new Size(100, 23);
+            txtUsuarioViejo.TabIndex = 29;
             // 
             // label6
             // 
@@ -198,22 +198,23 @@
             label2.TabIndex = 15;
             label2.Text = "CAMBIAR USUARIO";
             // 
-            // button1
+            // btnModificarUsuario
             // 
-            button1.Location = new Point(243, 139);
-            button1.Name = "button1";
-            button1.Size = new Size(83, 23);
-            button1.TabIndex = 0;
-            button1.Text = "MODIFICAR";
-            button1.UseVisualStyleBackColor = true;
+            btnModificarUsuario.Location = new Point(243, 139);
+            btnModificarUsuario.Name = "btnModificarUsuario";
+            btnModificarUsuario.Size = new Size(83, 23);
+            btnModificarUsuario.TabIndex = 0;
+            btnModificarUsuario.Text = "MODIFICAR";
+            btnModificarUsuario.UseVisualStyleBackColor = true;
+            btnModificarUsuario.Click += btnModificarUsuario_Click;
             // 
             // panel3
             // 
-            panel3.Controls.Add(textBox4);
+            panel3.Controls.Add(txtContrasenaNueva);
             panel3.Controls.Add(label3);
-            panel3.Controls.Add(textBox5);
-            panel3.Controls.Add(button2);
-            panel3.Controls.Add(textBox6);
+            panel3.Controls.Add(txtContrasenaVieja);
+            panel3.Controls.Add(btnModificarContrasena);
+            panel3.Controls.Add(txtUsuario);
             panel3.Controls.Add(label8);
             panel3.Controls.Add(label7);
             panel3.Controls.Add(label9);
@@ -222,12 +223,12 @@
             panel3.Size = new Size(329, 149);
             panel3.TabIndex = 27;
             // 
-            // textBox4
+            // txtContrasenaNueva
             // 
-            textBox4.Location = new Point(182, 85);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 37;
+            txtContrasenaNueva.Location = new Point(182, 85);
+            txtContrasenaNueva.Name = "txtContrasenaNueva";
+            txtContrasenaNueva.Size = new Size(100, 23);
+            txtContrasenaNueva.TabIndex = 37;
             // 
             // label3
             // 
@@ -240,28 +241,29 @@
             label3.TabIndex = 16;
             label3.Text = "CAMBIAR CONTRASEÑA";
             // 
-            // textBox5
+            // txtContrasenaVieja
             // 
-            textBox5.Location = new Point(182, 56);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(100, 23);
-            textBox5.TabIndex = 36;
+            txtContrasenaVieja.Location = new Point(182, 56);
+            txtContrasenaVieja.Name = "txtContrasenaVieja";
+            txtContrasenaVieja.Size = new Size(100, 23);
+            txtContrasenaVieja.TabIndex = 36;
             // 
-            // button2
+            // btnModificarContrasena
             // 
-            button2.Location = new Point(243, 123);
-            button2.Name = "button2";
-            button2.Size = new Size(83, 23);
-            button2.TabIndex = 1;
-            button2.Text = "MODIFICAR";
-            button2.UseVisualStyleBackColor = true;
+            btnModificarContrasena.Location = new Point(243, 123);
+            btnModificarContrasena.Name = "btnModificarContrasena";
+            btnModificarContrasena.Size = new Size(83, 23);
+            btnModificarContrasena.TabIndex = 1;
+            btnModificarContrasena.Text = "MODIFICAR";
+            btnModificarContrasena.UseVisualStyleBackColor = true;
+            btnModificarContrasena.Click += btnModificarContrasena_Click;
             // 
-            // textBox6
+            // txtUsuario
             // 
-            textBox6.Location = new Point(182, 27);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(100, 23);
-            textBox6.TabIndex = 35;
+            txtUsuario.Location = new Point(182, 27);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Size = new Size(100, 23);
+            txtUsuario.TabIndex = 35;
             // 
             // label8
             // 
@@ -306,7 +308,7 @@
             pictureBox1.TabIndex = 28;
             pictureBox1.TabStop = false;
             // 
-            // Form4
+            // EditUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -316,7 +318,7 @@
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "Form4";
+            Name = "EditUser";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form4";
             panel1.ResumeLayout(false);
@@ -335,20 +337,20 @@
         private Label label1;
         private Panel panel2;
         private Panel panel3;
-        private Button button1;
-        private Button button2;
+        private Button btnModificarUsuario;
+        private Button btnModificarContrasena;
         private PictureBox pictureBox1;
         private Label label6;
         private Label label5;
         private Label label4;
         private Label label2;
         private Label label3;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox textBox6;
+        private TextBox txtContrasena;
+        private TextBox txtUsuarioNuevo;
+        private TextBox txtUsuarioViejo;
+        private TextBox txtContrasenaNueva;
+        private TextBox txtContrasenaVieja;
+        private TextBox txtUsuario;
         private Label label8;
         private Label label7;
         private Label label9;

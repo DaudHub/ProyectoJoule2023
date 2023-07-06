@@ -28,10 +28,6 @@ C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\bin\Debug\net7.0-wind
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\bin\Debug\net7.0-windows\CRUD.runtimeconfig.json
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\bin\Debug\net7.0-windows\CRUD.dll
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\bin\Debug\net7.0-windows\CRUD.pdb
-C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.Form1.resources
-C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.Form2.resources
-C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.Form3.resources
-C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.Form4.resources
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.Properties.Resources.resources
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.csproj.GenerateResource.cache
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.GeneratedMSBuildEditorConfig.editorconfig
@@ -42,3 +38,7 @@ C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-wind
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\ref\CRUD.dll
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\bin\Debug\net7.0-windows\MySqlConnector.dll
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.csproj.CopyComplete
+C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.CreateUser.resources
+C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.DeleteUser.resources
+C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.EditUser.resources
+C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.UserMenu.resources
