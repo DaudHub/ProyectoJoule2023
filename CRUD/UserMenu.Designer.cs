@@ -89,7 +89,7 @@
             label1.Name = "label1";
             label1.Size = new Size(179, 38);
             label1.TabIndex = 1;
-            label1.Text = "BACK-OFFICE";
+            label1.Text = "USUARIOS";
             // 
             // pictureBox1
             // 
@@ -156,7 +156,7 @@
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             // 
-            // Form1
+            // UserMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -169,7 +169,7 @@
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);
-            Name = "Form1";
+            Name = "UserMenu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BACK-OFFICE";
             panel1.ResumeLayout(false);

@@ -42,3 +42,4 @@ C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-wind
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.DeleteUser.resources
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.EditUser.resources
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.UserMenu.resources
+C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\CRUD\obj\Debug\net7.0-windows\CRUD.Home.resources

@@ -34,6 +34,5 @@ namespace CRUD
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
     }
 }
