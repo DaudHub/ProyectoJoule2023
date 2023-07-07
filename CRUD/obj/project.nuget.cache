@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ox4inuvpRUwygWa9DvTkePVGfFv3BRqGcQ5Vn2dLZ9L7OFypqEstTgkkYvHesifs6LiScl4757qvjKszSxhdPw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\treyn\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\CRUD\\CRUD.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\treyn\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512"
+  ],
+  "logs": []
+}
