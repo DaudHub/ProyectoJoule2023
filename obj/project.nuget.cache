@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "TLjXX5m1b33of7HRiKLW1PEuGrpZnrwi8DkqZtXHp5PplR4EN9iqyvqTrq3KjDEwIHg5KPcX9UpPbSOU5WTnug==",
+  "success": true,
+  "projectFilePath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\RestAPI\\RestAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mateo\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.2\\microsoft.netcore.app.ref.7.0.2.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.2\\microsoft.windowsdesktop.app.ref.7.0.2.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.2\\microsoft.aspnetcore.app.ref.7.0.2.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.2\\microsoft.netcore.app.host.win-x64.7.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
