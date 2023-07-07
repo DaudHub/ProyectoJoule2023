@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TLjXX5m1b33of7HRiKLW1PEuGrpZnrwi8DkqZtXHp5PplR4EN9iqyvqTrq3KjDEwIHg5KPcX9UpPbSOU5WTnug==",
+  "dgSpecHash": "bkHENBkpGgFF66fxBDyIq+KzLfX9lB2+BF/shoA4PIWx3qrLhr2P3Sl1qjS0ftC9uij0A0GvwAK0dXuuQaMAJg==",
   "success": true,
-  "projectFilePath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\RestAPI\\RestAPI.csproj",
+  "projectFilePath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\RestAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateo\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512",
     "C:\\Users\\mateo\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.2\\microsoft.netcore.app.ref.7.0.2.nupkg.sha512",

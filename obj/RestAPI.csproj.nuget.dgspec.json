@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\mateo\\source\\repos\\DaudHub\\RestAPI\\RestAPI.csproj": {}
+    "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\RestAPI.csproj": {}
   },
   "projects": {
-    "c:\\Users\\mateo\\source\\repos\\DaudHub\\RestAPI\\RestAPI.csproj": {
+    "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\RestAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\mateo\\source\\repos\\DaudHub\\RestAPI\\RestAPI.csproj",
+        "projectUniqueName": "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\RestAPI.csproj",
         "projectName": "RestAPI",
-        "projectPath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\RestAPI\\RestAPI.csproj",
+        "projectPath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\RestAPI.csproj",
         "packagesPath": "C:\\Users\\mateo\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\RestAPI\\obj\\",
+        "outputPath": "c:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
