@@ -28,13 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             panel1 = new Panel();
             btnMinimizar = new Button();
             btnCerrar = new Button();
             label1 = new Label();
             btnUsuarios = new Button();
             btnAlmacenes = new Button();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -86,7 +91,7 @@
             // btnUsuarios
             // 
             btnUsuarios.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            btnUsuarios.Location = new Point(45, 133);
+            btnUsuarios.Location = new Point(194, 377);
             btnUsuarios.Name = "btnUsuarios";
             btnUsuarios.Size = new Size(164, 68);
             btnUsuarios.TabIndex = 8;
@@ -97,12 +102,34 @@
             // btnAlmacenes
             // 
             btnAlmacenes.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAlmacenes.Location = new Point(235, 133);
+            btnAlmacenes.Location = new Point(532, 377);
             btnAlmacenes.Name = "btnAlmacenes";
             btnAlmacenes.Size = new Size(165, 68);
             btnAlmacenes.TabIndex = 9;
             btnAlmacenes.Text = "Almacenes";
             btnAlmacenes.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.ErrorImage = (Image)resources.GetObject("pictureBox1.ErrorImage");
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(175, 132);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(205, 223);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 10;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.ErrorImage = (Image)resources.GetObject("pictureBox2.ErrorImage");
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(514, 132);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(205, 223);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 11;
+            pictureBox2.TabStop = false;
             // 
             // Home
             // 
@@ -110,14 +137,19 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(851, 487);
             ControlBox = false;
+            Controls.Add(pictureBox2);
+            Controls.Add(pictureBox1);
             Controls.Add(btnAlmacenes);
             Controls.Add(btnUsuarios);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Home";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Home";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -129,5 +161,7 @@
         private Label label1;
         private Button btnUsuarios;
         private Button btnAlmacenes;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }
