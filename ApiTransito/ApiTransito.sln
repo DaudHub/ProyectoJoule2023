@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTransito", "ApiTransito.csproj", "{FB874F88-7EE2-480C-8A7D-4E019F44B7FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB874F88-7EE2-480C-8A7D-4E019F44B7FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB874F88-7EE2-480C-8A7D-4E019F44B7FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB874F88-7EE2-480C-8A7D-4E019F44B7FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB874F88-7EE2-480C-8A7D-4E019F44B7FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8595B81A-D5A7-4BB8-A084-C542A75AC927}
+	EndGlobalSection
+EndGlobal
