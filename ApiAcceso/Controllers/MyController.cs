@@ -19,7 +19,7 @@ namespace RestAPI.Controllers{
         public dynamic GetToken([FromBody] User user) {
             try {
                 db_conn.Open();
-                var command = new MySqlCommand($"select usuario, pwd from proyecto.usuarios where usuario='{user.Username}' and pwd='{MyEncryption.EncryptToString(user.Password)}'", db_conn);
+                var command = new MySqlCommand($"select usuario, pwd from proyecto.usuario where usuario='{user.Username}' and pwd='{MyEncryption.EncryptToString(user.Password)}'", db_conn);
                 var reader = command.ExecuteReader();
                 reader.Read();
                 if (!reader.HasRows) return new {
