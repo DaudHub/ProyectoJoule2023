@@ -12,6 +12,25 @@ public class MyController : Controller {
     
     public MySqlConnection db_conn = new ("Server=127.0.0.1;User ID=apialmacen;Password=urbgieubgiutg98rtygtgiurnindg8958y;Database=proyecto");
     
+    [HttpGet]
+    [Route("viewbundles")]
+    public dynamic ViewBundles() {
+        try {
+            db_conn.Open();
+            var command = new MySqlCommand(null, db_conn);
+            command.CommandText = @"select from ";
+            return new {}; 
+        }
+        catch (Exception ex) {
+            return new {
+                message = "error while retrieving bundles",
+                exception = ex.ToString()
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
     private bool VerifyCredentialsForTruckDriver(Verification ver) {
         try {
             if (db_conn.State == ConnectionState.Closed) 
