@@ -16,7 +16,7 @@ namespace RestAPI {
             for (int i = 0; i < 255; i++) {
                 result += charset[random.Next(0, charset.Length)];
             }
-            command = new MySqlCommand($"select token from proyecto.tokens where token='{result}'", db_conn);
+            command = new MySqlCommand($"select tokn from proyecto.tokens where tokn='{result}'", db_conn);
             var reader = command.ExecuteReader();
             reader.Read();
             if (reader.HasRows) result = GenerateToken();

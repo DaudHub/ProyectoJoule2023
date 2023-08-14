@@ -30,7 +30,7 @@ namespace RestAPI.Controllers{
                 string token = new MyTokenGenerator().GenerateToken();
                 db_conn.Close();
                 db_conn.Open();
-                command = new MySqlCommand($"insert into proyecto.tokens values ('{token}', '{user.Username}')", db_conn);
+                command = new MySqlCommand($"insert into proyecto.tokens values ('{user.Username}', '{token}')", db_conn);
                 command.ExecuteNonQuery();
                 return new {
                     success = true,
@@ -55,7 +55,7 @@ namespace RestAPI.Controllers{
         public dynamic VerifyUser([FromBody] User user) {
             try {
                 db_conn.Open();
-                var command = new MySqlCommand($"select usuario, pwd from proyecto.usuarios where usuario='{user.Username}' and pwd='{MyEncryption.EncryptToString(user.Password)}'", db_conn);
+                var command = new MySqlCommand($"select usuario, pwd from proyecto.usuario where usuario='{user.Username}' and pwd='{MyEncryption.EncryptToString(user.Password)}'", db_conn);
                 MySqlDataReader reader = command.ExecuteReader();
                 if (!reader.HasRows) return new {
                     success = false,
