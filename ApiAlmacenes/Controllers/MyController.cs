@@ -24,11 +24,11 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            command.CommandText = @$"insert into proyecto.paquete (idpaquete, comentarios, pesokg, volumen, usuario)
-                values ({arg.Element.ID},'{arg.Element.Comments}', {arg.Element.Weight_Kg}, {arg.Element.Volume_m3}, '{arg.Element.User}')";
+            command.CommandText = @$"insert into proyecto.paquete (idpaquete, comentarios, pesokg, volumenm3, usuario, estadofisico, usuarioestado)
+                values ({arg.Element.ID},'{arg.Element.Comments}', {arg.Element.Weight_Kg}, {arg.Element.Volume_m3}, '{arg.Element.User}', '{arg.Element.PhysicalState}', '{arg.Element.StateUser}')";
             command.ExecuteNonQuery();
             foreach (var characteristic in arg.Element.Characteristics) {
-                command.CommandText = $"insert into proyecto.caracteristicaspaquete values ('{arg.Element.ID}','{characteristic}')";
+                command.CommandText = $"insert into proyecto.paquetecaracteristicas values ('{arg.Element.ID}', '{characteristic}')";
                 command.ExecuteNonQuery();
             }
             return new {
@@ -57,8 +57,8 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            Package package = new ();
-            command.CommandText= $@"select * from caracteristicaspaquete where idpaquete={arg.Element}";
+            var package = new Package();
+            command.CommandText= $@"select * from paquetecaracteristicas where idpaquete={arg.Element}";
             var reader = command.ExecuteReader();
             while (reader.Read()){
                 for (int i = 0; i < reader.FieldCount; i++) {
@@ -66,7 +66,7 @@ public class MyController : Controller {
                 }
             }
             reader.Close();
-            command.CommandText = $@"select comentarios, pesokg, volumen, usuario from paquete where idpaquete={arg.Element}";
+            command.CommandText = $@"select comentarios, pesokg, volumenm3, usuario, estadofisico, usuarioestado from paquete where idpaquete={arg.Element}";
             reader = command.ExecuteReader();
             reader.Read();
             if (!reader.HasRows) return new {
@@ -78,7 +78,10 @@ public class MyController : Controller {
             package.Weight_Kg = (decimal) reader.GetValue(1);
             package.Volume_m3 = (decimal) reader.GetValue(2);
             package.User = reader.GetString(3);
-            return package;
+            return new {
+                success = true,
+                package = package
+            };
         }
         catch (Exception e) {
             return new {
@@ -142,7 +145,7 @@ public class MyController : Controller {
         catch (Exception e) {
             return new {
                 success = false,
-                message = "error while checking in package",
+                message = "error while checking in bundle",
                 exception = e.ToString()
             };
         }
@@ -161,7 +164,7 @@ public class MyController : Controller {
                 success = false,
                 message = "authentication error"
             };
-            command.CommandText = @$"insert into paquetelote values ({arg.Element.BundleID},{arg.Element.PackageID})";
+            command.CommandText = @$"insert into lotepaquete values ({arg.Element.BundleID},{arg.Element.PackageID})";
             command.ExecuteNonQuery();
             return new {
                 success = true,
@@ -191,7 +194,7 @@ public class MyController : Controller {
             };
             MySqlCommand command = new (null, db_conn);
             command.CommandText = @$"insert into cargalote
-                values ({arg.Element.Bundle}, '{arg.Element.Plate}', '{arg.Element.User}','{arg.Element.Departure_Date}')";
+                values ({arg.Element.Bundle}, '{arg.Element.User}', '{arg.Element.Plate}','{arg.Element.Departure_Date}')";
             command.ExecuteNonQuery();
             return new {
                 success = true,
@@ -216,13 +219,14 @@ public class MyController : Controller {
                 db_conn.Open();
             MySqlCommand command = new (null, db_conn);
             command.CommandText = 
-            @$"select proyecto.usuarios.usuario, rol 
-            from proyecto.usuarios inner join proyecto.tokens on proyecto.usuarios.usuario=proyecto.tokens.usuario 
-            where token='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
+            @$"select proyecto.usuario.usuario, proyecto.rol.nombre
+                from proyecto.usuario inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario
+                inner join proyecto.rol on proyecto.rol.idrol=proyecto.usuario.idrol
+                where tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
             while (reader.Read()) {
-                if (reader.GetString(1) != "almacenero" && reader.GetString(1) != "admin") return false;
+                if (reader.GetString(1) != "almacenero" && reader.GetString(1) != "administrador") return false;
             }
             reader.Close();
             return true;
