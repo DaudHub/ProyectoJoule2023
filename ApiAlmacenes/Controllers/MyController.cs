@@ -6,6 +6,9 @@ using ApiAlmacenes;
 using Microsoft.VisualBasic;
 using System.Data;
 using Microsoft.AspNetCore.SignalR.Protocol;
+using System.Linq.Expressions;
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.ObjectPool;
 
 namespace ApiAlmacenes.Controllers;
 
@@ -193,6 +196,10 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
+            if (IsBundleInDepot(arg.Credentials.User, arg.Element.Bundle)) return new {
+                success = false,
+                message = "permission denied (bundle is not in the depot associated to this user)"
+            };
             command.CommandText = @$"insert into cargalote
                 values ({arg.Element.Bundle}, '{arg.Element.User}', '{arg.Element.Plate}','{arg.Element.Departure_Date}')";
             command.ExecuteNonQuery();
@@ -201,7 +208,7 @@ public class MyController : Controller {
                 message = "bundle loaded successfully"
             };
         }
-        catch(Exception e) {
+        catch (Exception e) {
             return new {
                 success = false,
                 message = "failed to load bundle",
@@ -211,6 +218,53 @@ public class MyController : Controller {
         finally {
             db_conn.Close();
         }
+    }
+
+    [HttpPost]
+    [Route("sendbundle")]
+    public dynamic SendBundle([FromBody] VerifCouple<Shipment> arg) {
+        try {
+            db_conn.Open();
+            if (!VerifyCredentials(arg.Credentials)) return new {
+                success = false,
+                message = "authentication error"
+            };
+            if (IsBundleInDepot(arg.Credentials.User, arg.Element.BundleID)) return new {
+                success = false,
+                message = "permission denied (bundle is not in the depot associated to this user)"
+            };
+            var command = new MySqlCommand(null, db_conn);
+            command.CommandText = @$"insert into loteenvio values ({arg.Element.BundleID}, '{arg.Element.Destination}', '{arg.Element.EstimatedDate}', {arg.Element.StateID})";
+            return new {
+                success=true,
+                message="bundle due sending"
+            };
+        }
+        catch(Exception e) {
+            return new {
+                success = false,
+                message = "error",
+                exception = e.ToString()
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
+
+    private bool IsBundleInDepot(string DepotManager, int BundleID) {
+        if (db_conn.State == ConnectionState.Closed)
+            db_conn.Open();
+        var command = new MySqlCommand(null, db_conn);
+        command.CommandText = @$"select idlugarenvio from almacenero where usuario='{DepotManager}'";
+        var reader = command.ExecuteReader();
+        reader.Read();
+        int lugarenvio = (int) reader.GetValue(0);
+        reader.Close();
+        command.CommandText = @$"select idlugarenvio from lote where idlote={BundleID}";
+        reader = command.ExecuteReader();
+        reader.Read();
+        return ((int) reader.GetValue(0) == lugarenvio);
     }
 
     private bool VerifyCredentials(Verification ver) {
