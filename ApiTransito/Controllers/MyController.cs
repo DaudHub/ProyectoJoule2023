@@ -14,9 +14,13 @@ public class MyController : Controller {
     
     [HttpGet]
     [Route("viewbundles")]
-    public dynamic ViewBundles() {
+    public dynamic ViewBundles(string token, string username, string password) {
         try {
             db_conn.Open();
+            if(VerifyCredentialsForTruckDriver(new Verification() { User = username, Password = password, Token = token })) return new {
+                success = false,
+                message = "authentication error"
+            };
             var command = new MySqlCommand(null, db_conn);
             command.CommandText = @"select from ";
             return new {}; 
@@ -37,13 +41,13 @@ public class MyController : Controller {
                 db_conn.Open();
             MySqlCommand command = new (null, db_conn);
             command.CommandText = 
-                @$"select proyecto.usuarios.usuario, rol 
-                from proyecto.usuarios inner join proyecto.tokens on proyecto.usuarios.usuario=proyecto.tokens.usuario 
-                where token='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
+                @$"select proyecto.usuario.usuario, rol 
+                from proyecto.usuarios inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario 
+                where tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
             while (reader.Read()) {
-                if (reader.GetString(1) != "camionero" && reader.GetString(1) != "admin") return false;
+                if (reader.GetString(1) != "camionero" && reader.GetString(1) != "administrador") return false;
             }
             reader.Close();
             return true;
@@ -59,13 +63,13 @@ public class MyController : Controller {
                 db_conn.Open();
             MySqlCommand command = new (null, db_conn);
             command.CommandText = 
-                @$"select proyecto.usuarios.usuario, rol 
-                from proyecto.usuarios inner join proyecto.tokens on proyecto.usuarios.usuario=proyecto.tokens.usuario 
-                where token='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
+                @$"select proyecto.usuario.usuario, rol 
+                from proyecto.cliente inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario 
+                where tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
             while (reader.Read()) {
-                if (reader.GetString(1) != "usuario" && reader.GetString(1) != "camionero" && reader.GetString(1) != "admin") return false;
+                if (reader.GetString(1) != "usuario" && reader.GetString(1) != "camionero" && reader.GetString(1) != "administrador") return false;
             }
             reader.Close();
             return true;
