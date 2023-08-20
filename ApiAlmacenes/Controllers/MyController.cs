@@ -167,6 +167,10 @@ public class MyController : Controller {
                 success = false,
                 message = "authentication error"
             };
+            if (!IsBundleInDepot(arg.Credentials.User, arg.Element.BundleID)) return new {
+                success = false,
+                message = "permission denied (bundle is not in the depot associated to this user)"
+            };
             command.CommandText = @$"insert into lotepaquete values ({arg.Element.BundleID},{arg.Element.PackageID})";
             command.ExecuteNonQuery();
             return new {
