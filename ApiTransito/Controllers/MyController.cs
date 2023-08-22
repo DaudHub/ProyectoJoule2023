@@ -10,19 +10,19 @@ namespace ApiAlmacenes.Controllers;
 [ApiController]
 public class MyController : Controller {
     
-    public MySqlConnection db_conn = new ("Server=127.0.0.1;User ID=transito;Password=gbiugbiuerbgieurgbiuerbgiubre;Database=proyecto;");
+    public MySqlConnection db_conn = new ("Server=127.0.0.1;User ID=transito;Password=gbiugbiuerbgieurgbiuerbgiubre;");
     
-    [HttpGet]
+    [HttpPost]
     [Route("viewbundles")]
-    public dynamic ViewBundles(string token, string username, string password) {
+    public dynamic ViewBundles([FromBody] Verification auth) {
         try {
             db_conn.Open();
-            if(!VerifyCredentialsForTruckDriver(new Verification() { User = username, Password = password, Token = token })) return new {
+            if(!VerifyCredentialsForTruckDriver(auth)) return new {
                 success = false,
                 message = "authentication error"
             };
             var command = new MySqlCommand(null, db_conn);
-            command.CommandText = @$"select matricula, fechasalida from conduce where usuario='{username}' order by fechasalida desc limit 1";
+            command.CommandText = @$"select matricula, fechasalida from proyecto.conduce where usuario='{auth.User}' order by fechasalida desc limit 1";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return new {
                 success = false,
@@ -30,10 +30,11 @@ public class MyController : Controller {
             };
             reader.Read();
             string plate = reader.GetString(0);
-            string truckDepartureDate = reader.GetString(1);
+            var truckDepartureDate = reader.GetDateTime(1).ToString("yyyy-MM-dd");
             reader.Close();
-            command.CommandText = @$"select idlote, idlugarenvio from cargalote where matricula='{plate}' and usuario='{username}' and fechasalida='{truckDepartureDate}
-                                    inner join lote on cargalote.idlote=lote.idlote'";
+            command.CommandText = @$"select cargalote.idlote, idlugarenvio from proyecto.cargalote
+                                    inner join proyecto.lote on cargalote.idlote=lote.idlote
+                                    where matricula='{plate}' and usuario='{auth.User}' and fechasalida='{truckDepartureDate}'";
             reader = command.ExecuteReader();
             var bundlesInTruck = new List<Bundle>();
             while (reader.Read()) {
@@ -43,7 +44,7 @@ public class MyController : Controller {
             return new {
                 success = true,
                 message = "bundles in truck retrieved successfully",
-                packages = bundlesInTruck.ToArray()
+                bundles = bundlesInTruck.ToArray()
             };
         }
         catch (Exception ex) {
@@ -62,13 +63,13 @@ public class MyController : Controller {
                 db_conn.Open();
             MySqlCommand command = new (null, db_conn);
             command.CommandText = 
-                @$"select proyecto.usuario.usuario, rol 
-                from proyecto.usuarios inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario 
+                @$"select proyecto.usuario.usuario, proyecto.usuario.idrol 
+                from proyecto.usuario inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario 
                 where tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
             while (reader.Read()) {
-                if (reader.GetString(1) != "camionero" && reader.GetString(1) != "administrador") return false;
+                if (reader.GetInt32(1) != 1 && reader.GetInt32(1) != 3) return false;
             }
             reader.Close();
             return true;
@@ -84,13 +85,13 @@ public class MyController : Controller {
                 db_conn.Open();
             MySqlCommand command = new (null, db_conn);
             command.CommandText = 
-                @$"select proyecto.usuario.usuario, rol 
+                @$"select proyecto.usuario.usuario, proyecto.usuario.idrol 
                 from proyecto.cliente inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario 
                 where tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
             while (reader.Read()) {
-                if (reader.GetString(1) != "usuario" && reader.GetString(1) != "camionero" && reader.GetString(1) != "administrador") return false;
+                if (reader.GetInt32(1) != 1 && reader.GetInt32(1) != 3 && reader.GetInt32(1) != 4) return false;
             }
             reader.Close();
             return true;
