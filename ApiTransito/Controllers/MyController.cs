@@ -10,25 +10,46 @@ namespace ApiAlmacenes.Controllers;
 [ApiController]
 public class MyController : Controller {
     
-    public MySqlConnection db_conn = new ("Server=127.0.0.1;User ID=apialmacen;Password=urbgieubgiutg98rtygtgiurnindg8958y;Database=proyecto");
+    public MySqlConnection db_conn = new ("Server=127.0.0.1;User ID=transito;Password=gbiugbiuerbgieurgbiuerbgiubre;Database=proyecto;");
     
     [HttpGet]
     [Route("viewbundles")]
     public dynamic ViewBundles(string token, string username, string password) {
         try {
             db_conn.Open();
-            if(VerifyCredentialsForTruckDriver(new Verification() { User = username, Password = password, Token = token })) return new {
+            if(!VerifyCredentialsForTruckDriver(new Verification() { User = username, Password = password, Token = token })) return new {
                 success = false,
                 message = "authentication error"
             };
             var command = new MySqlCommand(null, db_conn);
-            command.CommandText = @"select from ";
-            return new {}; 
+            command.CommandText = @$"select matricula, fechasalida from conduce where usuario='{username}' order by fechasalida desc limit 1";
+            var reader = command.ExecuteReader();
+            if (!reader.HasRows) return new {
+                success = false,
+                message = "the user is not driving a truck"
+            };
+            reader.Read();
+            string plate = reader.GetString(0);
+            string truckDepartureDate = reader.GetString(1);
+            reader.Close();
+            command.CommandText = @$"select idlote, idlugarenvio from cargalote where matricula='{plate}' and usuario='{username}' and fechasalida='{truckDepartureDate}
+                                    inner join lote on cargalote.idlote=lote.idlote'";
+            reader = command.ExecuteReader();
+            var bundlesInTruck = new List<Bundle>();
+            while (reader.Read()) {
+                bundlesInTruck.Add(new Bundle(reader.GetInt32(0), reader.GetInt32(1)));
+            }
+            reader.Close();
+            return new {
+                success = true,
+                message = "bundles in truck retrieved successfully",
+                packages = bundlesInTruck.ToArray()
+            };
         }
         catch (Exception ex) {
             return new {
                 message = "error while retrieving bundles",
-                exception = ex.ToString()
+                exception = ex.ToString() + ex.Message
             };
         }
         finally {
@@ -57,7 +78,7 @@ public class MyController : Controller {
         }
     }
 
-    private bool VerifyCredentialsForUser(Verification ver) {
+    private bool VerifyCredentialsForOthers(Verification ver) {
         try {
             if (db_conn.State == ConnectionState.Closed) 
                 db_conn.Open();
