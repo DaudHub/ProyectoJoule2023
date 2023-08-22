@@ -190,9 +190,10 @@ public class MyController : Controller {
         }
     }
 
+
     [HttpPost]
     [Route("loadbundle")]
-    public dynamic LoadBundle(VerifCouple<Load> arg) {
+    public dynamic LoadBundle([FromBody] VerifCouple<Load> arg) {
         try{
             db_conn.Open();
             if (!VerifyCredentials(arg.Credentials)) return new {
