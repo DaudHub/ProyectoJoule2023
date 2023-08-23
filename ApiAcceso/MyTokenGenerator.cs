@@ -7,8 +7,8 @@ namespace RestAPI {
         private readonly char[] charset = "ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!#$%&=?+-*_.".ToCharArray();
         private readonly MySqlConnection db_conn = new MySqlConnection("Server=127.0.0.1;User ID=accessapi;Password=kwefbwibcakebvuyevbiubqury38");
 
-        MySqlCommand command;
-        public string Token {get; set;}
+        MySqlCommand? command;
+        public string? Token { get; set; }
 
         public string GenerateToken() {
             db_conn.Open();
