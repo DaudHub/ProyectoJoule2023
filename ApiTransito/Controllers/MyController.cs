@@ -57,6 +57,35 @@ public class MyController : Controller {
             db_conn.Close();
         }
     }
+
+    [HttpPost]
+    [Route("mypackages")]
+    public dynamic SeePackages(VerifCouple<Package> arg) {
+        try {
+            db_conn.Open();
+            if (!VerifyCredentialsForOthers(arg.Credentials)) return new {
+                success = false,
+                message = "authentication error"
+            };
+            var command = new MySqlCommand(null, db_conn);
+            command.CommandText = @$"";
+            return new {
+                success = true,
+                message = "packages retrieved successfully",
+            };
+        }
+        catch (Exception e) {
+            return new {
+                success = false,
+                message = "error while retrieving packages"
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
+    
+
     private bool VerifyCredentialsForTruckDriver(Verification ver) {
         try {
             if (db_conn.State == ConnectionState.Closed) 
