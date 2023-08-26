@@ -68,10 +68,24 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             var command = new MySqlCommand(null, db_conn);
-            command.CommandText = @$"";
+            command.CommandText = @$"select proyecto.paquete.idpaquete, proyecto.estado.estado
+                                    from proyecto.paquete inner join proyecto.lotepaquete
+                                        on proyecto.paquete.idpaquete=proyecto.lotepaquete.idpaquete
+                                    inner join proyecto.loteenvio
+                                        on proyecto.loteenvio.idlote=proyecto.lotepaquete.idlote
+                                    inner join proyecto.estado
+                                        on proyecto.loteenvio.idestado=proyecto.estado.idestado
+                                    where usuario='{arg.Credentials.User}'";
+            var reader = command.ExecuteReader();
+            var packages = new List<dynamic>();
+            while (reader.Read()) {
+                packages.Add(new {ID = reader.GetInt32(0), state = reader.GetString(1)});
+            }
+            reader.Close();
             return new {
                 success = true,
                 message = "packages retrieved successfully",
+                packages = packages.ToArray()
             };
         }
         catch (Exception e) {
