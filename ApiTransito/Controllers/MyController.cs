@@ -60,26 +60,22 @@ public class MyController : Controller {
 
     [HttpPost]
     [Route("mypackages")]
-    public dynamic SeePackages(VerifCouple<Package> arg) {
+    public dynamic SeePackages(Verification auth) {
         try {
             db_conn.Open();
-            if (!VerifyCredentialsForOthers(arg.Credentials)) return new {
+            if (!VerifyCredentialsForOthers(auth)) return new {
                 success = false,
                 message = "authentication error"
             };
             var command = new MySqlCommand(null, db_conn);
-            command.CommandText = @$"select proyecto.paquete.idpaquete, proyecto.estado.estado
-                                    from proyecto.paquete inner join proyecto.lotepaquete
-                                        on proyecto.paquete.idpaquete=proyecto.lotepaquete.idpaquete
-                                    inner join proyecto.loteenvio
-                                        on proyecto.loteenvio.idlote=proyecto.lotepaquete.idlote
-                                    inner join proyecto.estado
-                                        on proyecto.loteenvio.idestado=proyecto.estado.idestado
-                                    where usuario='{arg.Credentials.User}'";
+            command.CommandText = @$"select proyecto.paquete.idpaquete, proyecto.paquete.comentarios, proyecto.paquete.pesokg, proyecto.paquete.volumenm3, proyecto.estadofisico.nombreestadofisico
+                                    from proyecto.paquete 
+                                        inner join proyecto.estadofisico on proyecto.paquete.idestadofisico=proyecto.estadofisico.idestadofisico
+                                    where usuario = '{auth.User}'";
             var reader = command.ExecuteReader();
             var packages = new List<dynamic>();
             while (reader.Read()) {
-                packages.Add(new {ID = reader.GetInt32(0), state = reader.GetString(1)});
+                packages.Add(new {ID = reader.GetInt32(0), comments = reader.GetString(1), weight = reader.GetInt32(2), volume = reader.GetInt32(3), state = reader.GetString(4)});
             }
             reader.Close();
             return new {
@@ -91,7 +87,8 @@ public class MyController : Controller {
         catch (Exception e) {
             return new {
                 success = false,
-                message = "error while retrieving packages"
+                message = "error while retrieving packages",
+                exception = e.ToString()
             };
         }
         finally {
@@ -129,7 +126,7 @@ public class MyController : Controller {
             MySqlCommand command = new (null, db_conn);
             command.CommandText = 
                 @$"select proyecto.usuario.usuario, proyecto.usuario.idrol 
-                from proyecto.cliente inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario 
+                from proyecto.usuario inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario 
                 where tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
