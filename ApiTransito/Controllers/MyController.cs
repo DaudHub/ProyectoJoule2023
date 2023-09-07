@@ -4,6 +4,7 @@ using ApiTransito.Models;
 using ApiAlmacenes;
 using MySqlConnector;
 using System.Data;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ApiAlmacenes.Controllers;
 
@@ -60,7 +61,7 @@ public class MyController : Controller {
 
     [HttpPost]
     [Route("mypackages")]
-    public dynamic SeePackages(Verification auth) {
+    public dynamic SeePackages([FromBody] Verification auth) {
         try {
             db_conn.Open();
             if (!VerifyCredentialsForOthers(auth)) return new {
@@ -96,6 +97,33 @@ public class MyController : Controller {
         }
     }
     
+    [HttpPost]
+    [Route("route")]
+    public dynamic CalculateRoute([FromBody] Verification auth) {
+        try {
+            db_conn.Open();
+            if (!VerifyCredentialsForTruckDriver(auth)) return new {
+                success = false,
+                message = "authentication error"
+            };
+            var command = new MySqlCommand(null, db_conn);
+            command.CommandText = @$"";
+            return new {
+                success = true,
+                message = "route calculated successfully"
+            };
+        }
+        catch (Exception e) {
+            return new {
+                success = false,
+                message = "error while calculating route",
+                exception = e.ToString()
+            };
+        }
+        finally {
+
+        }
+    }
 
     private bool VerifyCredentialsForTruckDriver(Verification ver) {
         try {
