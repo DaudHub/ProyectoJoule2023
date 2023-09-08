@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace pruebaruta;
-public class Route {
+namespace ApiAlmacenes;
+public class Routes {
 
     public static void MostEfficientRoute(List<(float, float)> destinations, (float, float) origin, ref List<(float, float)> storage) {
         if (destinations.Count == 0) return;

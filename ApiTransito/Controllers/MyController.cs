@@ -50,6 +50,7 @@ public class MyController : Controller {
         }
         catch (Exception ex) {
             return new {
+                success = false,
                 message = "error while retrieving bundles",
                 exception = ex.ToString() + ex.Message
             };
@@ -99,18 +100,41 @@ public class MyController : Controller {
     
     [HttpPost]
     [Route("route")]
-    public dynamic CalculateRoute([FromBody] Verification auth) {
+    public dynamic CalculateRoute([FromBody] Verification auth, float coordinateX, float coordinateY) {
         try {
             db_conn.Open();
-            if (!VerifyCredentialsForTruckDriver(auth)) return new {
+            if(!VerifyCredentialsForTruckDriver(auth)) return new {
                 success = false,
                 message = "authentication error"
             };
             var command = new MySqlCommand(null, db_conn);
-            command.CommandText = @$"";
+            command.CommandText = @$"select matricula, fechasalida from proyecto.conduce where usuario='{auth.User}' order by fechasalida desc limit 1";
+            var reader = command.ExecuteReader();
+            if (!reader.HasRows) return new {
+                success = false,
+                message = "the user is not driving a truck"
+            };
+            reader.Read();
+            string plate = reader.GetString(0);
+            var truckDepartureDate = reader.GetDateTime(1).ToString("yyyy-MM-dd");
+            reader.Close();
+            command.CommandText = @$"select proyecto.lugarenvio.latitud, proyecto.lugarenvio.longitud 
+                                    from proyecto.cargalote
+                                        inner join proyecto.lote on cargalote.idlote=lote.idlote
+                                        inner join proyecto.lugarenvio on proyecto.lote.idlugarenvio=proyecto.lugarenvio.idlugarenvio
+                                    where matricula='{plate}' and usuario='{auth.User}' and fechasalida='{truckDepartureDate}'";
+            reader = command.ExecuteReader();
+            var coordinates = new List<(float, float)>();
+            while (reader.Read()) {
+                coordinates.Add((reader.GetFloat(0), reader.GetFloat(1)));
+            }
+            reader.Close();
+            var orderedCoordinates = new List<(float, float)>();
+            Routes.MostEfficientRoute(coordinates, (coordinateX, coordinateY), ref orderedCoordinates);
             return new {
                 success = true,
-                message = "route calculated successfully"
+                message = "route calculated successfully",
+                route = orderedCoordinates.ToArray()
             };
         }
         catch (Exception e) {
@@ -121,7 +145,7 @@ public class MyController : Controller {
             };
         }
         finally {
-
+            db_conn.Close();
         }
     }
 
