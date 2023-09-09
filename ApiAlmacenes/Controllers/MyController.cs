@@ -27,7 +27,7 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            command.CommandText = @$"insert into proyecto.paquete (idpaquete, comentarios, pesokg, volumenm3, usuario, estadofisico, usuarioestado)
+            command.CommandText = @$"insert into proyecto.paquete (idpaquete, comentarios, pesokg, volumenm3, usuario, idestadofisico, usuarioestado)
                 values ({arg.Element.ID},'{arg.Element.Comments}', {arg.Element.Weight_Kg}, {arg.Element.Volume_m3}, '{arg.Element.User}', '{arg.Element.PhysicalState}', '{arg.Element.StateUser}')";
             command.ExecuteNonQuery();
             foreach (var characteristic in arg.Element.Characteristics) {
