@@ -117,13 +117,15 @@ public class MyController : Controller {
             reader.Read();
             string plate = reader.GetString(0);
             var truckDepartureDate = reader.GetDateTime(1).ToString("yyyy-MM-dd");
+            Console.WriteLine(truckDepartureDate);
             reader.Close();
-            command.CommandText = @$"select proyecto.lugarenvio.latitud, proyecto.lugarenvio.longitud 
+            var command2 = new MySqlCommand(null, db_conn);
+            command2.CommandText = @$"select proyecto.lugarenvio.latitud, proyecto.lugarenvio.longitud 
                                     from proyecto.cargalote
                                         inner join proyecto.lote on cargalote.idlote=lote.idlote
                                         inner join proyecto.lugarenvio on proyecto.lote.idlugarenvio=proyecto.lugarenvio.idlugarenvio
                                     where matricula='{plate}' and usuario='{auth.User}' and fechasalida='{truckDepartureDate}'";
-            reader = command.ExecuteReader();
+            reader = command2.ExecuteReader();
             var coordinates = new List<(float, float)>();
             while (reader.Read()) {
                 coordinates.Add((reader.GetFloat(0), reader.GetFloat(1)));
@@ -131,10 +133,15 @@ public class MyController : Controller {
             reader.Close();
             var orderedCoordinates = new List<(float, float)>();
             Routes.MostEfficientRoute(coordinates, (coordinateX, coordinateY), ref orderedCoordinates);
+            var orderedCoordinateArray = new dynamic[orderedCoordinates.Count];
+            for (int i = 0; i < orderedCoordinates.Count; i++) orderedCoordinateArray[i] = new {
+                coordinateX = orderedCoordinates[i].Item1,
+                coordinateY = orderedCoordinates[i].Item2
+            };
             return new {
                 success = true,
                 message = "route calculated successfully",
-                route = orderedCoordinates.ToArray()
+                route = orderedCoordinateArray
             };
         }
         catch (Exception e) {
