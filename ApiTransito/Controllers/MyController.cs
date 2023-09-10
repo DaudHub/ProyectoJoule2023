@@ -70,10 +70,12 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             var command = new MySqlCommand(null, db_conn);
-            command.CommandText = @$"select proyecto.paquete.idpaquete, proyecto.paquete.comentarios, proyecto.paquete.pesokg, proyecto.paquete.volumenm3, proyecto.estadofisico.nombreestadofisico
-                                    from proyecto.paquete 
-                                        inner join proyecto.estadofisico on proyecto.paquete.idestadofisico=proyecto.estadofisico.idestadofisico
-                                    where usuario = '{auth.User}'";
+            command.CommandText = @$"select paquete.usuario, paquete.idpaquete, loteenvio.idestado, lotepaquete.idlote, cargalote.matricula, cargalote.usuario, loteenvio.fechaestimada
+                                    from proyecto.paquete
+                                        inner join proyecto.lotepaquete on paquete.idpaquete=lotepaquete.idpaquete
+                                        left join proyecto.cargalote on lotepaquete.idlote=cargalote.idlote
+                                        left join proyecto.loteenvio on lotepaquete.idlote=loteenvio.idlote
+                                    where paquete.usuario='{auth.User}'";
             var reader = command.ExecuteReader();
             var packages = new List<dynamic>();
             while (reader.Read()) {
