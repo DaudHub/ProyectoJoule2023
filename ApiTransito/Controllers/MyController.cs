@@ -117,13 +117,12 @@ public class MyController : Controller {
             reader.Read();
             string plate = reader.GetString(0);
             var truckDepartureDate = reader.GetDateTime(1).ToString("yyyy-MM-dd");
-            Console.WriteLine(truckDepartureDate);
             reader.Close();
             var command2 = new MySqlCommand(null, db_conn);
             command2.CommandText = @$"select proyecto.lugarenvio.latitud, proyecto.lugarenvio.longitud 
                                     from proyecto.cargalote
-                                        inner join proyecto.lote on cargalote.idlote=lote.idlote
-                                        inner join proyecto.lugarenvio on proyecto.lote.idlugarenvio=proyecto.lugarenvio.idlugarenvio
+                                        inner join proyecto.loteenvio on cargalote.idlote=loteenvio.idlote
+                                        inner join proyecto.lugarenvio on proyecto.loteenvio.idlugarenvio=proyecto.lugarenvio.idlugarenvio
                                     where matricula='{plate}' and usuario='{auth.User}' and fechasalida='{truckDepartureDate}'";
             reader = command2.ExecuteReader();
             var coordinates = new List<(float, float)>();
