@@ -15,7 +15,7 @@ namespace ApiAlmacenes.Controllers;
 [ApiController]
 public class MyController : Controller {
 
-    public MySqlConnection db_conn = new ("Server=127.0.0.1;User ID=apialmacen;Password=urbgieubgiutg98rtygtgiurnindg8958y;Database=proyecto");
+    public MySqlConnection db_conn = new ("Server=127.0.0.1;User ID=apialmacen;Password=urbgieubgiutg98rtygtgiurnindg8958y");
 
     [HttpPost]
     [Route("newpackage")]
@@ -61,7 +61,7 @@ public class MyController : Controller {
             };
             MySqlCommand command = new (null, db_conn);
             var package = new Package();
-            command.CommandText= $@"select * from paquetecaracteristicas where idpaquete={arg.Element}";
+            command.CommandText= $@"select * from proyecto.paquetecaracteristicas where idpaquete={arg.Element}";
             var reader = command.ExecuteReader();
             while (reader.Read()){
                 for (int i = 0; i < reader.FieldCount; i++) {
@@ -69,7 +69,7 @@ public class MyController : Controller {
                 }
             }
             reader.Close();
-            command.CommandText = $@"select comentarios, pesokg, volumenm3, usuario, estadofisico, usuarioestado from paquete where idpaquete={arg.Element}";
+            command.CommandText = $@"select comentarios, pesokg, volumenm3, usuario, estadofisico, usuarioestado from proyecto.paquete where idpaquete={arg.Element}";
             reader = command.ExecuteReader();
             reader.Read();
             if (!reader.HasRows) return new {
@@ -108,7 +108,7 @@ public class MyController : Controller {
                 mesage = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            command.CommandText = @$"insert into lote (idlote, idlugarenvio)
+            command.CommandText = @$"insert into proyecto.lote (idlote, idlugarenvio)
                 values ({arg.Element.ID}, {arg.Element.Deposit})";
             command.ExecuteNonQuery();
             return new {
@@ -138,7 +138,7 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            command.CommandText = $"update lote set idlugarenvio={arg.Element.DepositID} where idlote={arg.Element.BundleID}";
+            command.CommandText = $"update proyecto.lote set idlugarenvio={arg.Element.DepositID} where idlote={arg.Element.BundleID}";
             command.ExecuteNonQuery();
             return new {
                 success = true,
@@ -171,7 +171,7 @@ public class MyController : Controller {
                 success = false,
                 message = "permission denied (bundle is not in the depot associated to this user)"
             };
-            command.CommandText = @$"insert into lotepaquete values ({arg.Element.BundleID},{arg.Element.PackageID})";
+            command.CommandText = @$"insert into proyecto.lotepaquete values ({arg.Element.BundleID},{arg.Element.PackageID})";
             command.ExecuteNonQuery();
             return new {
                 success = true,
@@ -200,12 +200,16 @@ public class MyController : Controller {
                 success = false,
                 message = "authentication error"
             };
-            MySqlCommand command = new (null, db_conn);
-            if (IsBundleInDepot(arg.Credentials.User, arg.Element.Bundle)) return new {
+            if (!IsBundleInDepot(arg.Credentials.User, arg.Element.Bundle)) return new {
                 success = false,
                 message = "permission denied (bundle is not in the depot associated to this user)"
             };
-            command.CommandText = @$"insert into cargalote
+            if(!HasDestination(arg.Element.Bunele)) return new {
+                success = false,
+                message = "permission denied (bundle has no destination assigned)"
+            };
+            MySqlCommand command = new (null, db_conn);
+            command.CommandText = @$"insert into proyecto.cargalote
                 values ({arg.Element.Bundle}, '{arg.Element.User}', '{arg.Element.Plate}','{arg.Element.Departure_Date}')";
             command.ExecuteNonQuery();
             return new {
@@ -239,7 +243,7 @@ public class MyController : Controller {
                 message = "permission denied (bundle is not in the depot associated to this user)"
             };
             var command = new MySqlCommand(null, db_conn);
-            command.CommandText = @$"insert into loteenvio values ({arg.Element.BundleID}, '{arg.Element.Destination}', '{arg.Element.EstimatedDate}', {arg.Element.StateID})";
+            command.CommandText = @$"insert into proyecto.loteenvio values ({arg.Element.BundleID}, '{arg.Element.Destination}', '{arg.Element.EstimatedDate}', {arg.Element.StateID})";
             return new {
                 success=true,
                 message="bundle due sending"
@@ -261,15 +265,25 @@ public class MyController : Controller {
         if (db_conn.State == ConnectionState.Closed)
             db_conn.Open();
         var command = new MySqlCommand(null, db_conn);
-        command.CommandText = @$"select idlugarenvio from almacenero where usuario='{DepotManager}'";
+        command.CommandText = @$"select proyecto.almacenero.idlugarenvio from proyecto.almacenero where usuario='{DepotManager}'";
         var reader = command.ExecuteReader();
         reader.Read();
         int lugarenvio = (int) reader.GetValue(0);
         reader.Close();
-        command.CommandText = @$"select idlugarenvio from lote where idlote={BundleID}";
+        command.CommandText = @$"select proyecto.lote.idlugarenvio from proyecto.lote where idlote={BundleID}";
         reader = command.ExecuteReader();
         reader.Read();
         return ((int) reader.GetValue(0) == lugarenvio);
+    }
+
+    private bool HasDestination(int bundleID) {
+        if (db_conn.State == ConnectionState.Closed)
+            db_conn.Open();
+        var command = new MySqlCommand(null, db_conn);
+        command.CommandText = $"select proyecto.loteenvio.idlugarenvio from proyecto.loteenvio where idlote={bundleID}"
+        var reader = command.ExecuteReader();
+        if(!reader.HasRows) return false;
+        else return true;
     }
 
     private bool VerifyCredentials(Verification ver) {
