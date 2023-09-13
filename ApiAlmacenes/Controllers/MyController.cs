@@ -204,7 +204,7 @@ public class MyController : Controller {
                 success = false,
                 message = "permission denied (bundle is not in the depot associated to this user)"
             };
-            if(!HasDestination(arg.Element.Bunele)) return new {
+            if(!HasDestination(arg.Element.Bundle)) return new {
                 success = false,
                 message = "permission denied (bundle has no destination assigned)"
             };
@@ -280,7 +280,7 @@ public class MyController : Controller {
         if (db_conn.State == ConnectionState.Closed)
             db_conn.Open();
         var command = new MySqlCommand(null, db_conn);
-        command.CommandText = $"select proyecto.loteenvio.idlugarenvio from proyecto.loteenvio where idlote={bundleID}"
+        command.CommandText = $"select proyecto.loteenvio.idlugarenvio from proyecto.loteenvio where idlote={bundleID}";
         var reader = command.ExecuteReader();
         if(!reader.HasRows) return false;
         else return true;
