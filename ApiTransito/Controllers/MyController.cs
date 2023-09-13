@@ -157,6 +157,39 @@ public class MyController : Controller {
         }
     }
 
+    [HttpPost]
+    [Route("confirm")]
+    public dynamic ConfirmPackage(Verification auth) {
+        try {
+            db_conn.Open();
+            if(!VerifyCredentialsForTruckDriver(auth)) return new {
+                success = false,
+                message = "authentication error"
+            };
+            var command = new MySqlCommand(null, db_conn);
+            command.CommandText = @$"select matricula, fechasalida from proyecto.conduce where usuario='{auth.User}' order by fechasalida desc limit 1";
+            var reader = command.ExecuteReader();
+            if (!reader.HasRows) return new {
+                success = false,
+                message = "the user is not driving a truck"
+            };
+            return new {
+                success = true,
+                message = "delivery confirmed successfully"
+            };
+        }
+        catch (Exception e) {
+            return new {
+                success = false,
+                message = "error while confirming delivery",
+                exception = e.ToString()
+            };
+        }
+        finally {
+
+        }
+    }
+
     private bool VerifyCredentialsForTruckDriver(Verification ver) {
         try {
             if (db_conn.State == ConnectionState.Closed) 

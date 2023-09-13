@@ -13,5 +13,9 @@ namespace ApiAlmacenes {
 
         public string User { get; set; }
 
+        public int IDPhysicalState { get; set; }
+
+        public string StateUser { get; set; }
+
     }
 }
