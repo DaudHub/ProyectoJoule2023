@@ -159,20 +159,22 @@ public class MyController : Controller {
 
     [HttpPost]
     [Route("confirm")]
-    public dynamic ConfirmPackage(Verification auth) {
+    public dynamic ConfirmBundle([FromBody] VerifCouple<int> arg) {
         try {
             db_conn.Open();
-            if(!VerifyCredentialsForTruckDriver(auth)) return new {
+            if(!VerifyCredentialsForTruckDriver(arg.Credentials)) return new {
                 success = false,
                 message = "authentication error"
             };
             var command = new MySqlCommand(null, db_conn);
-            command.CommandText = @$"select matricula, fechasalida from proyecto.conduce where usuario='{auth.User}' order by fechasalida desc limit 1";
+            command.CommandText = @$"select matricula, fechasalida from proyecto.conduce where usuario='{arg.Credentials.User}' order by fechasalida desc limit 1";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return new {
                 success = false,
                 message = "the user is not driving a truck"
             };
+            command.CommandText = @$"update loteenvio set idestado=3 where idlote={arg.Element}";
+            command.ExecuteNonQuery();
             return new {
                 success = true,
                 message = "delivery confirmed successfully"
