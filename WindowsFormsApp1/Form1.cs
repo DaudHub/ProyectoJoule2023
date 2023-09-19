@@ -39,12 +39,12 @@ namespace WindowsFormsApp1
                 {
                     db_conn.Open();
                     var command = new MySqlCommand(null, db_conn);
-                    command.CommandText = $@"select usuario, pwd from proyecto.usuario where usuario={username} and contraseña={password}";
+                    command.CommandText = $@"select usuario, pwd from proyecto.usuario where usuario='{username}' and pwd='{MyEncryption.EncryptToString(password)}'";
                     var reader = command.ExecuteReader();
                     if (!reader.HasRows) return false;
                     else return true;
                 }
-                catch
+                catch (Exception ex)
                 {
                     return false;
                 }
