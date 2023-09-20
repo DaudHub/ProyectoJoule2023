@@ -25,3 +25,4 @@ C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\WindowsFormsApp1\obj\Debug
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Admin.resources
 C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.UsersPanel.resources
+C:\Users\mateo\source\repos\DaudHub\ProyectoJoule2023\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Almacenes.resources

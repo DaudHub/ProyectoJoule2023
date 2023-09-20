@@ -370,6 +370,7 @@
             this.usuario.HeaderText = "Usuario";
             this.usuario.Name = "usuario";
             this.usuario.ReadOnly = true;
+            this.usuario.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // rol
             // 
@@ -377,6 +378,7 @@
             this.rol.HeaderText = "Rol";
             this.rol.Name = "rol";
             this.rol.ReadOnly = true;
+            this.rol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // nombre
             // 
@@ -384,6 +386,7 @@
             this.nombre.HeaderText = "Nombre";
             this.nombre.Name = "nombre";
             this.nombre.ReadOnly = true;
+            this.nombre.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // apellido
             // 
@@ -391,6 +394,7 @@
             this.apellido.HeaderText = "Apellido";
             this.apellido.Name = "apellido";
             this.apellido.ReadOnly = true;
+            this.apellido.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // UsersPanel
             // 
