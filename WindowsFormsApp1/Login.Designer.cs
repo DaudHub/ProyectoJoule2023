@@ -48,8 +48,8 @@ namespace WindowsFormsApp1
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(67)))), ((int)(((byte)(96)))));
-            this.panel1.Location = new System.Drawing.Point(134, 168);
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(49)))), ((int)(((byte)(70)))));
+            this.panel1.Location = new System.Drawing.Point(119, 168);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(301, 180);
             this.panel1.TabIndex = 0;
@@ -63,14 +63,14 @@ namespace WindowsFormsApp1
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.txtUsuario);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(412, 47);
+            this.panel2.Location = new System.Drawing.Point(397, 47);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(296, 337);
             this.panel2.TabIndex = 1;
             // 
             // pnlINiciar
             // 
-            this.pnlINiciar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(67)))), ((int)(((byte)(96)))));
+            this.pnlINiciar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(49)))), ((int)(((byte)(70)))));
             this.pnlINiciar.Controls.Add(this.lblIniciar);
             this.pnlINiciar.Location = new System.Drawing.Point(89, 269);
             this.pnlINiciar.Name = "pnlINiciar";
@@ -92,8 +92,10 @@ namespace WindowsFormsApp1
             // 
             // txtContraseña
             // 
+            this.txtContraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContraseña.Location = new System.Drawing.Point(147, 177);
             this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.PasswordChar = '*';
             this.txtContraseña.Size = new System.Drawing.Size(121, 20);
             this.txtContraseña.TabIndex = 4;
             // 
@@ -102,7 +104,7 @@ namespace WindowsFormsApp1
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Source Sans Pro", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(20, 172);
+            this.label3.Location = new System.Drawing.Point(20, 173);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(112, 24);
             this.label3.TabIndex = 3;
@@ -113,7 +115,7 @@ namespace WindowsFormsApp1
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Source Sans Pro", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(20, 121);
+            this.label2.Location = new System.Drawing.Point(20, 122);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 24);
             this.label2.TabIndex = 2;
@@ -140,9 +142,9 @@ namespace WindowsFormsApp1
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(134, 47);
+            this.pictureBox1.Location = new System.Drawing.Point(119, 69);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(272, 115);
+            this.pictureBox1.Size = new System.Drawing.Size(278, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -156,6 +158,8 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Login";
             this.Text = "Iniciar sesión";
             this.panel2.ResumeLayout(false);

@@ -19,11 +19,15 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void pnlINiciar_Click(object sender, EventArgs e)
+        private async void pnlINiciar_Click(object sender, EventArgs e)
         {
-            if (!VerifyUser(txtUsuario.Text, txtContraseña.Text))
+            if (!await VerifyUser(txtUsuario.Text, txtContraseña.Text))
+            {
                 MessageBox.Show("Error de verificación");
-            else /*codigo para mostrar el siguiente formulario*/;
+                return;
+            }
+            Hide();
+            new Admin(txtUsuario.Text).Show();
         }
 
         private void lblIniciar_Click(object sender, EventArgs e)
@@ -31,16 +35,16 @@ namespace WindowsFormsApp1
             pnlINiciar_Click(sender, e);
         }
 
-        private bool VerifyUser(string username, string password)
+        private async Task<bool> VerifyUser(string username, string password)
         {
             using (var db_conn = new MySqlConnection("Host=127.0.0.1;User=root;Password=porfavorentrar"))
             {
                 try
                 {
-                    db_conn.Open();
+                    await db_conn.OpenAsync();
                     var command = new MySqlCommand(null, db_conn);
-                    command.CommandText = $@"select usuario, pwd from proyecto.usuario where usuario='{username}' and pwd='{MyEncryption.EncryptToString(password)}'";
-                    var reader = command.ExecuteReader();
+                    command.CommandText = $@"select usuario, pwd from proyecto.usuario where usuario='{username}' and pwd='{MyEncryption.EncryptToString(password)}' and idrol=1";
+                    var reader = await command.ExecuteReaderAsync();
                     if (!reader.HasRows) return false;
                     else return true;
                 }
@@ -50,7 +54,7 @@ namespace WindowsFormsApp1
                 }
                 finally
                 {
-                    db_conn.Close();
+                    await db_conn.CloseAsync();
                 }
             }
         }
