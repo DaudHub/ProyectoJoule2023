@@ -30,33 +30,37 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Admin));
             this.SidePanel = new System.Windows.Forms.Panel();
+            this.pnlMonitoreo = new System.Windows.Forms.Panel();
+            this.lblMonitoreo = new System.Windows.Forms.Label();
+            this.pnlAsignar = new System.Windows.Forms.Panel();
+            this.lblAsignar = new System.Windows.Forms.Label();
+            this.pnlCamiones = new System.Windows.Forms.Panel();
+            this.lblAlmacenes = new System.Windows.Forms.Label();
             this.pnlUsuarios = new System.Windows.Forms.Panel();
+            this.lblUsuarios = new System.Windows.Forms.Label();
             this.pcbxLogo = new System.Windows.Forms.PictureBox();
             this.pnlBackground = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pnlAlmacenes = new System.Windows.Forms.Panel();
-            this.pnlAsignar = new System.Windows.Forms.Panel();
-            this.pnlMonitoreo = new System.Windows.Forms.Panel();
-            this.lblUsuarios = new System.Windows.Forms.Label();
-            this.lblAlmacenes = new System.Windows.Forms.Label();
-            this.lblAsignar = new System.Windows.Forms.Label();
-            this.lblMonitoreo = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblCamiones = new System.Windows.Forms.Label();
             this.SidePanel.SuspendLayout();
+            this.pnlMonitoreo.SuspendLayout();
+            this.pnlAsignar.SuspendLayout();
+            this.pnlCamiones.SuspendLayout();
             this.pnlUsuarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).BeginInit();
             this.panel1.SuspendLayout();
-            this.pnlAlmacenes.SuspendLayout();
-            this.pnlAsignar.SuspendLayout();
-            this.pnlMonitoreo.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // SidePanel
             // 
             this.SidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(67)))), ((int)(((byte)(96)))));
+            this.SidePanel.Controls.Add(this.panel2);
             this.SidePanel.Controls.Add(this.pnlMonitoreo);
             this.SidePanel.Controls.Add(this.pnlAsignar);
-            this.SidePanel.Controls.Add(this.pnlAlmacenes);
+            this.SidePanel.Controls.Add(this.pnlCamiones);
             this.SidePanel.Controls.Add(this.pnlUsuarios);
             this.SidePanel.Controls.Add(this.pcbxLogo);
             this.SidePanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -64,6 +68,72 @@
             this.SidePanel.Name = "SidePanel";
             this.SidePanel.Size = new System.Drawing.Size(188, 450);
             this.SidePanel.TabIndex = 1;
+            // 
+            // pnlMonitoreo
+            // 
+            this.pnlMonitoreo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(133)))), ((int)(((byte)(185)))));
+            this.pnlMonitoreo.Controls.Add(this.lblMonitoreo);
+            this.pnlMonitoreo.Location = new System.Drawing.Point(14, 339);
+            this.pnlMonitoreo.Name = "pnlMonitoreo";
+            this.pnlMonitoreo.Size = new System.Drawing.Size(159, 34);
+            this.pnlMonitoreo.TabIndex = 4;
+            this.pnlMonitoreo.Click += new System.EventHandler(this.pnlMonitoreo_Click);
+            // 
+            // lblMonitoreo
+            // 
+            this.lblMonitoreo.AutoSize = true;
+            this.lblMonitoreo.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMonitoreo.ForeColor = System.Drawing.Color.White;
+            this.lblMonitoreo.Location = new System.Drawing.Point(25, 3);
+            this.lblMonitoreo.Name = "lblMonitoreo";
+            this.lblMonitoreo.Size = new System.Drawing.Size(109, 27);
+            this.lblMonitoreo.TabIndex = 4;
+            this.lblMonitoreo.Text = "Monitoreo";
+            this.lblMonitoreo.Click += new System.EventHandler(this.lblMonitoreo_Click);
+            // 
+            // pnlAsignar
+            // 
+            this.pnlAsignar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(133)))), ((int)(((byte)(185)))));
+            this.pnlAsignar.Controls.Add(this.lblAsignar);
+            this.pnlAsignar.Location = new System.Drawing.Point(14, 290);
+            this.pnlAsignar.Name = "pnlAsignar";
+            this.pnlAsignar.Size = new System.Drawing.Size(159, 34);
+            this.pnlAsignar.TabIndex = 3;
+            this.pnlAsignar.Click += new System.EventHandler(this.PnlAsignar_Click);
+            // 
+            // lblAsignar
+            // 
+            this.lblAsignar.AutoSize = true;
+            this.lblAsignar.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAsignar.ForeColor = System.Drawing.Color.White;
+            this.lblAsignar.Location = new System.Drawing.Point(39, 3);
+            this.lblAsignar.Name = "lblAsignar";
+            this.lblAsignar.Size = new System.Drawing.Size(81, 27);
+            this.lblAsignar.TabIndex = 3;
+            this.lblAsignar.Text = "Asignar";
+            this.lblAsignar.Click += new System.EventHandler(this.lblAsignar_Click);
+            // 
+            // pnlCamiones
+            // 
+            this.pnlCamiones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(133)))), ((int)(((byte)(185)))));
+            this.pnlCamiones.Controls.Add(this.lblCamiones);
+            this.pnlCamiones.Location = new System.Drawing.Point(14, 242);
+            this.pnlCamiones.Name = "pnlCamiones";
+            this.pnlCamiones.Size = new System.Drawing.Size(159, 34);
+            this.pnlCamiones.TabIndex = 2;
+            this.pnlCamiones.Click += new System.EventHandler(this.pnlCamiones_Click);
+            // 
+            // lblAlmacenes
+            // 
+            this.lblAlmacenes.AutoSize = true;
+            this.lblAlmacenes.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAlmacenes.ForeColor = System.Drawing.Color.White;
+            this.lblAlmacenes.Location = new System.Drawing.Point(24, 4);
+            this.lblAlmacenes.Name = "lblAlmacenes";
+            this.lblAlmacenes.Size = new System.Drawing.Size(111, 27);
+            this.lblAlmacenes.TabIndex = 2;
+            this.lblAlmacenes.Text = "Almacenes";
+            this.lblAlmacenes.Click += new System.EventHandler(this.lblAlmacenes_Click);
             // 
             // pnlUsuarios
             // 
@@ -74,6 +144,18 @@
             this.pnlUsuarios.Size = new System.Drawing.Size(159, 34);
             this.pnlUsuarios.TabIndex = 1;
             this.pnlUsuarios.Click += new System.EventHandler(this.pnlUsuarios_Click);
+            // 
+            // lblUsuarios
+            // 
+            this.lblUsuarios.AutoSize = true;
+            this.lblUsuarios.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuarios.ForeColor = System.Drawing.Color.White;
+            this.lblUsuarios.Location = new System.Drawing.Point(31, 4);
+            this.lblUsuarios.Name = "lblUsuarios";
+            this.lblUsuarios.Size = new System.Drawing.Size(93, 27);
+            this.lblUsuarios.TabIndex = 1;
+            this.lblUsuarios.Text = "Usuarios";
+            this.lblUsuarios.Click += new System.EventHandler(this.lblUsuarios_Click);
             // 
             // pcbxLogo
             // 
@@ -114,83 +196,27 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Administración";
             // 
-            // pnlAlmacenes
+            // panel2
             // 
-            this.pnlAlmacenes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(133)))), ((int)(((byte)(185)))));
-            this.pnlAlmacenes.Controls.Add(this.lblAlmacenes);
-            this.pnlAlmacenes.Location = new System.Drawing.Point(14, 197);
-            this.pnlAlmacenes.Name = "pnlAlmacenes";
-            this.pnlAlmacenes.Size = new System.Drawing.Size(159, 34);
-            this.pnlAlmacenes.TabIndex = 2;
-            this.pnlAlmacenes.Click += new System.EventHandler(this.pnlAlmacenes_Click);
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(133)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.lblAlmacenes);
+            this.panel2.Location = new System.Drawing.Point(14, 193);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(159, 34);
+            this.panel2.TabIndex = 2;
+            this.panel2.Click += new System.EventHandler(this.pnlAlmacenes_Click);
             // 
-            // pnlAsignar
+            // lblCamiones
             // 
-            this.pnlAsignar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(133)))), ((int)(((byte)(185)))));
-            this.pnlAsignar.Controls.Add(this.lblAsignar);
-            this.pnlAsignar.Location = new System.Drawing.Point(14, 248);
-            this.pnlAsignar.Name = "pnlAsignar";
-            this.pnlAsignar.Size = new System.Drawing.Size(159, 34);
-            this.pnlAsignar.TabIndex = 3;
-            this.pnlAsignar.Click += new System.EventHandler(this.PnlAsignar_Click);
-            // 
-            // pnlMonitoreo
-            // 
-            this.pnlMonitoreo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(133)))), ((int)(((byte)(185)))));
-            this.pnlMonitoreo.Controls.Add(this.lblMonitoreo);
-            this.pnlMonitoreo.Location = new System.Drawing.Point(14, 297);
-            this.pnlMonitoreo.Name = "pnlMonitoreo";
-            this.pnlMonitoreo.Size = new System.Drawing.Size(159, 34);
-            this.pnlMonitoreo.TabIndex = 4;
-            this.pnlMonitoreo.Click += new System.EventHandler(this.pnlMonitoreo_Click);
-            // 
-            // lblUsuarios
-            // 
-            this.lblUsuarios.AutoSize = true;
-            this.lblUsuarios.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuarios.ForeColor = System.Drawing.Color.White;
-            this.lblUsuarios.Location = new System.Drawing.Point(31, 4);
-            this.lblUsuarios.Name = "lblUsuarios";
-            this.lblUsuarios.Size = new System.Drawing.Size(93, 27);
-            this.lblUsuarios.TabIndex = 1;
-            this.lblUsuarios.Text = "Usuarios";
-            this.lblUsuarios.Click += new System.EventHandler(this.lblUsuarios_Click);
-            // 
-            // lblAlmacenes
-            // 
-            this.lblAlmacenes.AutoSize = true;
-            this.lblAlmacenes.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAlmacenes.ForeColor = System.Drawing.Color.White;
-            this.lblAlmacenes.Location = new System.Drawing.Point(23, 3);
-            this.lblAlmacenes.Name = "lblAlmacenes";
-            this.lblAlmacenes.Size = new System.Drawing.Size(111, 27);
-            this.lblAlmacenes.TabIndex = 2;
-            this.lblAlmacenes.Text = "Almacenes";
-            this.lblAlmacenes.Click += new System.EventHandler(this.lblAlmacenes_Click);
-            // 
-            // lblAsignar
-            // 
-            this.lblAsignar.AutoSize = true;
-            this.lblAsignar.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAsignar.ForeColor = System.Drawing.Color.White;
-            this.lblAsignar.Location = new System.Drawing.Point(39, 3);
-            this.lblAsignar.Name = "lblAsignar";
-            this.lblAsignar.Size = new System.Drawing.Size(81, 27);
-            this.lblAsignar.TabIndex = 3;
-            this.lblAsignar.Text = "Asignar";
-            this.lblAsignar.Click += new System.EventHandler(this.lblAsignar_Click);
-            // 
-            // lblMonitoreo
-            // 
-            this.lblMonitoreo.AutoSize = true;
-            this.lblMonitoreo.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMonitoreo.ForeColor = System.Drawing.Color.White;
-            this.lblMonitoreo.Location = new System.Drawing.Point(25, 3);
-            this.lblMonitoreo.Name = "lblMonitoreo";
-            this.lblMonitoreo.Size = new System.Drawing.Size(109, 27);
-            this.lblMonitoreo.TabIndex = 4;
-            this.lblMonitoreo.Text = "Monitoreo";
-            this.lblMonitoreo.Click += new System.EventHandler(this.lblMonitoreo_Click);
+            this.lblCamiones.AutoSize = true;
+            this.lblCamiones.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCamiones.ForeColor = System.Drawing.Color.White;
+            this.lblCamiones.Location = new System.Drawing.Point(27, 3);
+            this.lblCamiones.Name = "lblCamiones";
+            this.lblCamiones.Size = new System.Drawing.Size(103, 27);
+            this.lblCamiones.TabIndex = 3;
+            this.lblCamiones.Text = "Camiones";
+            this.lblCamiones.Click += new System.EventHandler(this.lblCamiones_Click);
             // 
             // Admin
             // 
@@ -206,17 +232,19 @@
             this.Text = "Admin";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Admin_FormClosed);
             this.SidePanel.ResumeLayout(false);
+            this.pnlMonitoreo.ResumeLayout(false);
+            this.pnlMonitoreo.PerformLayout();
+            this.pnlAsignar.ResumeLayout(false);
+            this.pnlAsignar.PerformLayout();
+            this.pnlCamiones.ResumeLayout(false);
+            this.pnlCamiones.PerformLayout();
             this.pnlUsuarios.ResumeLayout(false);
             this.pnlUsuarios.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.pnlAlmacenes.ResumeLayout(false);
-            this.pnlAlmacenes.PerformLayout();
-            this.pnlAsignar.ResumeLayout(false);
-            this.pnlAsignar.PerformLayout();
-            this.pnlMonitoreo.ResumeLayout(false);
-            this.pnlMonitoreo.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -231,10 +259,12 @@
         private System.Windows.Forms.Panel pnlUsuarios;
         private System.Windows.Forms.Panel pnlMonitoreo;
         private System.Windows.Forms.Panel pnlAsignar;
-        private System.Windows.Forms.Panel pnlAlmacenes;
+        private System.Windows.Forms.Panel pnlCamiones;
         private System.Windows.Forms.Label lblAlmacenes;
         private System.Windows.Forms.Label lblUsuarios;
         private System.Windows.Forms.Label lblAsignar;
         private System.Windows.Forms.Label lblMonitoreo;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblCamiones;
     }
 }

@@ -62,7 +62,7 @@ namespace WindowsFormsApp1
 
         private void lblAlmacenes_Click(object sender, EventArgs e)
         {
-            pnlAlmacenes_Click(pnlAlmacenes, e);
+            pnlAlmacenes_Click(pnlCamiones, e);
         }
 
         private void PnlAsignar_Click(object sender, EventArgs e)
@@ -85,6 +85,17 @@ namespace WindowsFormsApp1
         private void lblMonitoreo_Click(object sender, EventArgs e)
         {
             pnlMonitoreo_Click(pnlMonitoreo, e);
+        }
+
+        private void pnlCamiones_Click(object sender, EventArgs e)
+        {
+            UpdateButtons((Panel)sender);
+            pnlBackground.Controls.Clear();
+        }
+
+        private void lblCamiones_Click(object sender, EventArgs e)
+        {
+            pnlCamiones_Click(sender, e);
         }
     }
 }
