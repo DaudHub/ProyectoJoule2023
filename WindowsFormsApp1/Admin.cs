@@ -15,12 +15,14 @@ namespace WindowsFormsApp1
 
         UsersPanel usersPanel;
         Almacenes almacenes;
+        Camiones camiones;
 
         public Admin(string name)
         {
             InitializeComponent();
             usersPanel = new UsersPanel();
             almacenes = new Almacenes();
+            camiones = new Camiones();
             pnlBackground.Controls.Add(new UsersPanel());
             UpdateButtons((Panel)SidePanel.Controls["pnlUsuarios"]);
         }
@@ -62,7 +64,19 @@ namespace WindowsFormsApp1
 
         private void lblAlmacenes_Click(object sender, EventArgs e)
         {
-            pnlAlmacenes_Click(pnlCamiones, e);
+            pnlAlmacenes_Click(pnlAlmacenes, e);
+        }
+
+        private void pnlCamiones_Click(object sender, EventArgs e)
+        {
+            UpdateButtons((Panel)sender);
+            pnlBackground.Controls.Clear();
+            pnlBackground.Controls.Add(camiones);
+        }
+
+        private void lblCamiones_Click(object sender, EventArgs e)
+        {
+            pnlCamiones_Click(pnlCamiones, e);
         }
 
         private void PnlAsignar_Click(object sender, EventArgs e)
@@ -87,15 +101,5 @@ namespace WindowsFormsApp1
             pnlMonitoreo_Click(pnlMonitoreo, e);
         }
 
-        private void pnlCamiones_Click(object sender, EventArgs e)
-        {
-            UpdateButtons((Panel)sender);
-            pnlBackground.Controls.Clear();
-        }
-
-        private void lblCamiones_Click(object sender, EventArgs e)
-        {
-            pnlCamiones_Click(sender, e);
-        }
     }
 }
