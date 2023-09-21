@@ -184,6 +184,7 @@
             // 
             this.lblCrearUsuario.AutoSize = true;
             this.lblCrearUsuario.Font = new System.Drawing.Font("Source Sans Pro", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCrearUsuario.ForeColor = System.Drawing.Color.White;
             this.lblCrearUsuario.Location = new System.Drawing.Point(28, 2);
             this.lblCrearUsuario.Name = "lblCrearUsuario";
             this.lblCrearUsuario.Size = new System.Drawing.Size(40, 17);
@@ -195,7 +196,7 @@
             // 
             this.pnlAplicar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(133)))), ((int)(((byte)(185)))));
             this.pnlAplicar.Controls.Add(this.lblAplicar);
-            this.pnlAplicar.Location = new System.Drawing.Point(253, 148);
+            this.pnlAplicar.Location = new System.Drawing.Point(253, 145);
             this.pnlAplicar.Name = "pnlAplicar";
             this.pnlAplicar.Size = new System.Drawing.Size(98, 22);
             this.pnlAplicar.TabIndex = 24;
@@ -205,6 +206,7 @@
             // 
             this.lblAplicar.AutoSize = true;
             this.lblAplicar.Font = new System.Drawing.Font("Source Sans Pro", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAplicar.ForeColor = System.Drawing.Color.White;
             this.lblAplicar.Location = new System.Drawing.Point(27, 2);
             this.lblAplicar.Name = "lblAplicar";
             this.lblAplicar.Size = new System.Drawing.Size(48, 17);
@@ -216,7 +218,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Source Sans Pro", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(223, 115);
+            this.label10.Location = new System.Drawing.Point(223, 112);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(84, 17);
             this.label10.TabIndex = 18;
@@ -226,7 +228,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Source Sans Pro", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(223, 90);
+            this.label11.Location = new System.Drawing.Point(223, 87);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(55, 17);
             this.label11.TabIndex = 16;
@@ -236,7 +238,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Source Sans Pro", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(223, 64);
+            this.label12.Location = new System.Drawing.Point(223, 61);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(53, 17);
             this.label12.TabIndex = 14;
@@ -246,7 +248,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(221, 21);
+            this.label13.Location = new System.Drawing.Point(221, 18);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(166, 27);
             this.label13.TabIndex = 13;
@@ -256,7 +258,7 @@
             // 
             this.cbxModificarUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxModificarUsuario.FormattingEnabled = true;
-            this.cbxModificarUsuario.Location = new System.Drawing.Point(283, 60);
+            this.cbxModificarUsuario.Location = new System.Drawing.Point(283, 57);
             this.cbxModificarUsuario.Name = "cbxModificarUsuario";
             this.cbxModificarUsuario.Size = new System.Drawing.Size(104, 21);
             this.cbxModificarUsuario.TabIndex = 25;
@@ -264,7 +266,7 @@
             // 
             // txtActualizacion
             // 
-            this.txtActualizacion.Location = new System.Drawing.Point(313, 114);
+            this.txtActualizacion.Location = new System.Drawing.Point(313, 111);
             this.txtActualizacion.Name = "txtActualizacion";
             this.txtActualizacion.Size = new System.Drawing.Size(74, 20);
             this.txtActualizacion.TabIndex = 26;
@@ -278,14 +280,14 @@
             "rol",
             "nombre",
             "apellido"});
-            this.cbxAtributo.Location = new System.Drawing.Point(283, 87);
+            this.cbxAtributo.Location = new System.Drawing.Point(283, 84);
             this.cbxAtributo.Name = "cbxAtributo";
             this.cbxAtributo.Size = new System.Drawing.Size(104, 21);
             this.cbxAtributo.TabIndex = 27;
             // 
             // txtConfirmar
             // 
-            this.txtConfirmar.Location = new System.Drawing.Point(496, 89);
+            this.txtConfirmar.Location = new System.Drawing.Point(496, 86);
             this.txtConfirmar.Name = "txtConfirmar";
             this.txtConfirmar.Size = new System.Drawing.Size(91, 20);
             this.txtConfirmar.TabIndex = 34;
@@ -294,7 +296,7 @@
             // 
             this.cbxEliminarUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxEliminarUsuario.FormattingEnabled = true;
-            this.cbxEliminarUsuario.Location = new System.Drawing.Point(483, 60);
+            this.cbxEliminarUsuario.Location = new System.Drawing.Point(483, 57);
             this.cbxEliminarUsuario.Name = "cbxEliminarUsuario";
             this.cbxEliminarUsuario.Size = new System.Drawing.Size(104, 21);
             this.cbxEliminarUsuario.TabIndex = 33;
@@ -304,7 +306,7 @@
             // 
             this.pnlEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(133)))), ((int)(((byte)(185)))));
             this.pnlEliminar.Controls.Add(this.lblEliminar);
-            this.pnlEliminar.Location = new System.Drawing.Point(460, 122);
+            this.pnlEliminar.Location = new System.Drawing.Point(460, 119);
             this.pnlEliminar.Name = "pnlEliminar";
             this.pnlEliminar.Size = new System.Drawing.Size(98, 22);
             this.pnlEliminar.TabIndex = 32;
@@ -314,6 +316,7 @@
             // 
             this.lblEliminar.AutoSize = true;
             this.lblEliminar.Font = new System.Drawing.Font("Source Sans Pro", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEliminar.ForeColor = System.Drawing.Color.White;
             this.lblEliminar.Location = new System.Drawing.Point(22, 2);
             this.lblEliminar.Name = "lblEliminar";
             this.lblEliminar.Size = new System.Drawing.Size(57, 17);
@@ -325,7 +328,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Source Sans Pro", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(423, 92);
+            this.label8.Location = new System.Drawing.Point(423, 89);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(67, 17);
             this.label8.TabIndex = 31;
@@ -335,7 +338,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Source Sans Pro", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(423, 64);
+            this.label14.Location = new System.Drawing.Point(423, 61);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(53, 17);
             this.label14.TabIndex = 29;
@@ -345,7 +348,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Source Sans Pro", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(421, 21);
+            this.label15.Location = new System.Drawing.Point(421, 18);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(156, 27);
             this.label15.TabIndex = 28;
