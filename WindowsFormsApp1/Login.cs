@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,9 +15,12 @@ namespace WindowsFormsApp1
     public partial class Login : Form
     {
 
+        public static Login login;
+
         public Login()
         {
             InitializeComponent();
+            login = this;
         }
 
         private async void pnlINiciar_Click(object sender, EventArgs e)
@@ -27,6 +31,8 @@ namespace WindowsFormsApp1
                 return;
             }
             Hide();
+            txtUsuario.Text = null;
+            txtContraseña.Text = null;
             new Admin(txtUsuario.Text).Show();
         }
 

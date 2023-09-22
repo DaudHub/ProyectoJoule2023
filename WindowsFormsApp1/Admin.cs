@@ -17,6 +17,7 @@ namespace WindowsFormsApp1
         Almacenes almacenes;
         Camiones camiones;
         Asignar asignar;
+        Monitoreo monitoreo;
 
         public Admin(string name)
         {
@@ -25,6 +26,7 @@ namespace WindowsFormsApp1
             almacenes = new Almacenes();
             camiones = new Camiones();
             asignar = new Asignar();
+            monitoreo = new Monitoreo();
             pnlBackground.Controls.Add(new UsersPanel());
             UpdateButtons((Panel)SidePanel.Controls["pnlUsuarios"]);
         }
@@ -37,7 +39,6 @@ namespace WindowsFormsApp1
                     pnl.BackColor = SidePanel.BackColor;
                 else pnl.BackColor = Color.FromArgb(49, 133, 185);
             }
-
         }
 
         private void Admin_FormClosed(object sender, FormClosedEventArgs e)
@@ -97,6 +98,7 @@ namespace WindowsFormsApp1
         {
             UpdateButtons((Panel)sender);
             pnlBackground.Controls.Clear();
+            pnlBackground.Controls.Add(monitoreo);
         }
 
         private void lblMonitoreo_Click(object sender, EventArgs e)
@@ -104,5 +106,16 @@ namespace WindowsFormsApp1
             pnlMonitoreo_Click(pnlMonitoreo, e);
         }
 
+        private void pnlCerrarSesion_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login.login.Show();
+            this.Dispose();
+        }
+
+        private void lblCerrarSesion_Click(object sender, EventArgs e)
+        {
+            pnlCerrarSesion_Click(sender, e);
+        }
     }
 }
