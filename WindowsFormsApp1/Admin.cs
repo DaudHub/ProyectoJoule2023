@@ -16,6 +16,7 @@ namespace WindowsFormsApp1
         UsersPanel usersPanel;
         Almacenes almacenes;
         Camiones camiones;
+        Asignar asignar;
 
         public Admin(string name)
         {
@@ -23,6 +24,7 @@ namespace WindowsFormsApp1
             usersPanel = new UsersPanel();
             almacenes = new Almacenes();
             camiones = new Camiones();
+            asignar = new Asignar();
             pnlBackground.Controls.Add(new UsersPanel());
             UpdateButtons((Panel)SidePanel.Controls["pnlUsuarios"]);
         }
@@ -83,6 +85,7 @@ namespace WindowsFormsApp1
         {
             UpdateButtons((Panel)sender);
             pnlBackground.Controls.Clear();
+            pnlBackground.Controls.Add(asignar);
         }
 
         private void lblAsignar_Click(object sender, EventArgs e)

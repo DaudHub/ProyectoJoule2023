@@ -164,9 +164,7 @@ namespace WindowsFormsApp1
                     var reader = await command.ExecuteReaderAsync();
                     cbxEliminarCamion.Items.Clear();
                     while (reader.Read())
-                    {
                         cbxEliminarCamion.Items.Add(reader.GetString(0));
-                    }
                 }
                 catch (Exception ex)
                 {

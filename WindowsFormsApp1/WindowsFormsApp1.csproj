@@ -81,6 +81,12 @@
     <Compile Include="Almacenes.Designer.cs">
       <DependentUpon>Almacenes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Asignar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Asignar.Designer.cs">
+      <DependentUpon>Asignar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Camiones.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Almacenes.resx">
       <DependentUpon>Almacenes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asignar.resx">
+      <DependentUpon>Asignar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Camiones.resx">
       <DependentUpon>Camiones.cs</DependentUpon>
