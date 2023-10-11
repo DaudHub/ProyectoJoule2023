@@ -52,19 +52,19 @@
     ]
   },
   "packageFolders": {
-    "/home/mdaud/.nuget/packages/": {}
+    "/Users/mdaud/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/mdaud/Repos/ProyectoJoule2023/ApiAcceso/RestAPI.csproj",
+      "projectUniqueName": "/Users/mdaud/Repositories/ProyectoJoule2023/ApiAcceso/RestAPI.csproj",
       "projectName": "RestAPI",
-      "projectPath": "/home/mdaud/Repos/ProyectoJoule2023/ApiAcceso/RestAPI.csproj",
-      "packagesPath": "/home/mdaud/.nuget/packages/",
-      "outputPath": "/home/mdaud/Repos/ProyectoJoule2023/ApiAcceso/obj/",
+      "projectPath": "/Users/mdaud/Repositories/ProyectoJoule2023/ApiAcceso/RestAPI.csproj",
+      "packagesPath": "/Users/mdaud/.nuget/packages/",
+      "outputPath": "/Users/mdaud/Repositories/ProyectoJoule2023/ApiAcceso/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/mdaud/.nuget/NuGet/NuGet.Config"
+        "/Users/mdaud/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -112,7 +112,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/7.0.110/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
       }
     }
   }

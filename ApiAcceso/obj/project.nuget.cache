@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "cHwv69bOt1sijuoo7YsvpqW9GWbR3tQY6rDTvumBDGy75m7R5OJ82IYs+0b6gAKFe9AxdmX83nONDSjVbp8MLQ==",
+  "dgSpecHash": "/mSWzlzm1QuiA4fBw3A1xpq4LodRX9ckNbyba74qqdGGuoUt0PAaaov7KNHt4R4tV2fCqExfm1eAguujbdusWw==",
   "success": true,
-  "projectFilePath": "/home/mdaud/Repos/ProyectoJoule2023/ApiAcceso/RestAPI.csproj",
+  "projectFilePath": "/Users/mdaud/Repositories/ProyectoJoule2023/ApiAcceso/RestAPI.csproj",
   "expectedPackageFiles": [
-    "/home/mdaud/.nuget/packages/mysqlconnector/2.2.6/mysqlconnector.2.2.6.nupkg.sha512"
+    "/Users/mdaud/.nuget/packages/mysqlconnector/2.2.6/mysqlconnector.2.2.6.nupkg.sha512"
   ],
   "logs": []
 }
