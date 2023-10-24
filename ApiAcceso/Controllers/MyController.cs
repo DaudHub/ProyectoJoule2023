@@ -55,11 +55,13 @@ namespace RestAPI.Controllers{
         public dynamic VerifyUser([FromBody] User user) {
             try {
                 db_conn.Open();
-                var command = new MySqlCommand($"select usuario, pwd, rol from proyecto.usuario where usuario='{user.Username}' and pwd='{MyEncryption.EncryptToString(user.Password)} and rol={user.Role}'", db_conn);
+                var command = new MySqlCommand($@"select usuario, pwd, idrol 
+                                                from proyecto.usuario 
+                                                where usuario='{user.Username}' and pwd='{MyEncryption.EncryptToString(user.Password)}' and idrol={user.Role}", db_conn);
                 MySqlDataReader reader = command.ExecuteReader();
                 if (!reader.HasRows) return new {
                     success = false,
-                    message = "incorrect password or user does not exist"
+                    message = "incorrect password or role or user does not exist"
                 };
                 else return new {
                     success = true,
