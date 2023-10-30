@@ -19,7 +19,7 @@ namespace RestAPI.Controllers{
         public dynamic GetToken([FromBody] User user) {
             try {
                 db_conn.Open();
-                var command = new MySqlCommand($"select usuario, pwd from proyecto.usuarios where usuario='{user.Username}' and pwd='{MyEncryption.EncryptToString(user.Password)}'", db_conn);
+                var command = new MySqlCommand($"select usuario, pwd from proyecto.usuario where usuario='{user.Username}' and pwd='{MyEncryption.EncryptToString(user.Password)}'", db_conn);
                 var reader = command.ExecuteReader();
                 reader.Read();
                 if (!reader.HasRows) return new {
@@ -30,7 +30,7 @@ namespace RestAPI.Controllers{
                 string token = new MyTokenGenerator().GenerateToken();
                 db_conn.Close();
                 db_conn.Open();
-                command = new MySqlCommand($"insert into proyecto.tokens values ('{token}', '{user.Username}')", db_conn);
+                command = new MySqlCommand($"insert into proyecto.tokens values ('{user.Username}', '{token}')", db_conn);
                 command.ExecuteNonQuery();
                 return new {
                     success = true,
@@ -55,11 +55,13 @@ namespace RestAPI.Controllers{
         public dynamic VerifyUser([FromBody] User user) {
             try {
                 db_conn.Open();
-                var command = new MySqlCommand($"select usuario, pwd from proyecto.usuarios where usuario='{user.Username}' and pwd='{MyEncryption.EncryptToString(user.Password)}'", db_conn);
+                var command = new MySqlCommand($@"select usuario, pwd, idrol 
+                                                from proyecto.usuario 
+                                                where usuario='{user.Username}' and pwd='{MyEncryption.EncryptToString(user.Password)}' and idrol={user.Role}", db_conn);
                 MySqlDataReader reader = command.ExecuteReader();
                 if (!reader.HasRows) return new {
                     success = false,
-                    message = "incorrect password or user does not exist"
+                    message = "incorrect password or role or user does not exist"
                 };
                 else return new {
                     success = true,
