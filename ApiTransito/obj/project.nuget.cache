@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "0yDRPd5hFonBUqLsCIPR6RsbGF5oQcH8bssjDMV4k98b3NB1HyIOKeecRn9pACXC/8m8q6fBF0slxoUiXSAhoA==",
+  "dgSpecHash": "Rt8b3D5xr1qYpTWihwsic6KHMhg8EnjXsEtROWizkTFfJx+gqLPdLWxyUZ8Kpl6Dpy25n3pNubLl9C4E3MhVvQ==",
   "success": true,
-  "projectFilePath": "/home/mdaud/Repos/ProyectoJoule2023/ApiTransito/ApiTransito.csproj",
+  "projectFilePath": "/Users/mdaud/Repositories/ProyectoJoule2023/ApiTransito/ApiTransito.csproj",
   "expectedPackageFiles": [
-    "/home/mdaud/.nuget/packages/mysqlconnector/2.2.6/mysqlconnector.2.2.6.nupkg.sha512"
+    "/Users/mdaud/.nuget/packages/mysqlconnector/2.2.7/mysqlconnector.2.2.7.nupkg.sha512",
+    "/Users/mdaud/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

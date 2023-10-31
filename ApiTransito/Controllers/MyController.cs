@@ -5,6 +5,7 @@ using ApiAlmacenes;
 using MySqlConnector;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
+using Newtonsoft.Json;
 
 namespace ApiAlmacenes.Controllers;
 
@@ -191,6 +192,18 @@ public class MyController : Controller {
 
         }
     }
+
+    // [HttpGet]
+    // [Route("map")]
+    // public async Task<HttpResponseMessage> GetMap(dynamic[] coordinates) {
+    //     try {
+    //         using var client = new HttpClient();
+            
+    //     }
+    //     catch (Exception ex) {
+
+    //     }
+    // }
 
     private bool VerifyCredentialsForTruckDriver(Verification ver) {
         try {
