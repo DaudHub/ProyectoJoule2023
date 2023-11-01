@@ -39,7 +39,7 @@ namespace WindowsFormsApp1
                     await db_conn.OpenAsync();
                     var command = new MySqlCommand(null, db_conn);
                     command.CommandText = $@"start transaction;
-                    insert into proyecto.lugarenvio values
+                    insert ignore into proyecto.lugarenvio values
                     ({txtID.Text}, {txtLatitud.Text}, {txtLongitud.Text}, '{txtCalle.Text}', {txtNumeroPuerta.Text});
                     insert into proyecto.almacen values
                     ({txtID.Text}, {txtCapacidadKg.Text}, {txtCapacidadm3.Text});
@@ -53,7 +53,7 @@ namespace WindowsFormsApp1
                     var command = new MySqlCommand(null, db_conn);
                     command.CommandText = "rollback;";
                     await command.ExecuteNonQueryAsync();
-                    MessageBox.Show("Error al intentar crear el almacén");
+                    MessageBox.Show("Error al intentar crear el almacén" + ex.ToString());
                 }
                 finally {
                     await db_conn.CloseAsync();

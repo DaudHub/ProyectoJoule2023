@@ -36,7 +36,7 @@ namespace WindowsFormsApp1
                 {
                     await db_conn.OpenAsync();
                     var command = new MySqlCommand(null, db_conn);
-                    command.CommandText = $@"insert into proyecto.camion values ('{txtMatricula.Text}', '{txtModelo.Text}', {txtCapacidadCamion.Text}, {txtVolumenCamion.Text})";
+                    command.CommandText = $@"insert into proyecto.camion values ('{txtMatricula.Text}', {txtModelo.Text}, {txtCapacidadCamion.Text}, {txtVolumenCamion.Text})";
                     await command.ExecuteNonQueryAsync();
                     UpdateTable();
                     MessageBox.Show("Camión creado con éxito");
@@ -185,7 +185,7 @@ namespace WindowsFormsApp1
                 {
                     await db_conn.OpenAsync();
                     var command = new MySqlCommand(null, db_conn);
-                    command.CommandText = $"select * from proyecto.camion";
+                    command.CommandText = $"select matricula, nombre, capacidadkg, capacidadm3 from proyecto.camion inner join proyecto.modelo on camion.modelo=modelo.idmodelo";
                     var reader = await command.ExecuteReaderAsync();
                     tblCamiones.Rows.Clear();
                     while (reader.Read())
@@ -195,7 +195,7 @@ namespace WindowsFormsApp1
                 }
                 catch (Exception ex)
                 {
-
+                    MessageBox.Show(ex.ToString());
                 }
                 finally
                 {
