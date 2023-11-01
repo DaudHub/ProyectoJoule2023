@@ -61,6 +61,7 @@ public class MyController : Controller {
         }
     }
 
+    // NOTA: ESTE MÉTODO ES PARA LOS CLIENTES, NO PARA EL CAMIONERO
     [HttpPost]
     [Route("mypackages")]
     public dynamic SeePackages([FromBody] Verification auth) {
