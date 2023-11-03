@@ -5,6 +5,11 @@ using ApiAlmacenes;
 using MySqlConnector;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
+using Newtonsoft.Json;
+using System.Net;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Xml.Schema;
+using System.Text;
 
 namespace ApiAlmacenes.Controllers;
 
@@ -33,13 +38,15 @@ public class MyController : Controller {
             string plate = reader.GetString(0);
             var truckDepartureDate = reader.GetDateTime(1).ToString("yyyy-MM-dd");
             reader.Close();
-            command.CommandText = @$"select cargalote.idlote, idlugarenvio from proyecto.cargalote
+            command.CommandText = @$"select cargalote.idlote, loteenvio.idlugarenvio, lugarenvio.calle, lugarenvio.numeropuerta from proyecto.cargalote
                                     inner join proyecto.lote on cargalote.idlote=lote.idlote
+                                    inner join proyecto.loteenvio on cargalote.idlote=loteenvio.idlote
+                                    inner join proyecto.lugarenvio on loteenvio.idlugarenvio=lugarenvio.idlugarenvio
                                     where matricula='{plate}' and usuario='{auth.User}' and fechasalida='{truckDepartureDate}'";
             reader = command.ExecuteReader();
-            var bundlesInTruck = new List<Bundle>();
+            var bundlesInTruck = new List<dynamic>();
             while (reader.Read()) {
-                bundlesInTruck.Add(new Bundle(reader.GetInt32(0), reader.GetInt32(1)));
+                bundlesInTruck.Add(new { id = reader.GetInt32(0), deposit = reader.GetInt32(1), street = reader.GetString(2), number = reader.GetInt32(3) });
             }
             reader.Close();
             return new {
@@ -60,6 +67,7 @@ public class MyController : Controller {
         }
     }
 
+    // NOTA: ESTE MÉTODO ES PARA LOS CLIENTES, NO PARA EL CAMIONERO
     [HttpPost]
     [Route("mypackages")]
     public dynamic SeePackages([FromBody] Verification auth) {
@@ -121,7 +129,7 @@ public class MyController : Controller {
             var truckDepartureDate = reader.GetDateTime(1).ToString("yyyy-MM-dd");
             reader.Close();
             var command2 = new MySqlCommand(null, db_conn);
-            command2.CommandText = @$"select proyecto.lugarenvio.latitud, proyecto.lugarenvio.longitud 
+            command2.CommandText = @$"select proyecto.lugarenvio.latitud, proyecto.lugarenvio.longitud
                                     from proyecto.cargalote
                                         inner join proyecto.loteenvio on cargalote.idlote=loteenvio.idlote
                                         inner join proyecto.lugarenvio on proyecto.loteenvio.idlugarenvio=proyecto.lugarenvio.idlugarenvio
@@ -188,7 +196,57 @@ public class MyController : Controller {
             };
         }
         finally {
+            db_conn.Close();
+        }
+    }
 
+
+
+    [HttpGet]
+    [Route("map")]
+    public ContentResult GetMap([FromBody] float[][] coordinates, float x, float y)  {
+        try {
+            var result = new ContentResult();
+            string htmlContent = $@"
+            <html>
+            <head>
+                <title>Route Map</title>
+                <link rel='stylesheet' href='ttps://unpkg.com/leaflet@1.7.1/dist/leaflet.css' />
+                <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'></script>
+            </head>
+            <body>
+                <div id='map' style='height: 500px;'></div>
+                <script>
+                    const map = L.map('map').setView([{x}, {y}], 13)
+
+                    L.tileLayer('https://a.tile.openstreetmap.org/15/{x}/{y}.png'," + @"{
+                        maxZoom: 19,
+                    }).addTo(map)
+
+                function drawRoute(routeData) {
+                    const coordinates = routeData.coordinates
+                    const routePolyline = L.polyline(coordinates, { color: 'blue' }).addTo(map)
+                    map.fitBounds(routePolyline.getBounds())
+                } 
+                const routeData = {
+                    coordinates:" + @$"[ {JsonConvert.SerializeObject(coordinates)} ]" + @"
+                }
+                drawRoute(routeData)
+                </script>
+            </body>
+            </html>
+            ";
+            result.StatusCode = 200;
+            result.Content = htmlContent;
+            result.ContentType = "text/html";
+            return result;
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex.ToString());
+            var result = new ContentResult();
+            result.StatusCode = 500;
+            result.Content = "ha habido un error";
+            return result;
         }
     }
 
