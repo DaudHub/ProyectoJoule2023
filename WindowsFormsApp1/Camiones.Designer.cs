@@ -34,7 +34,6 @@
             this.txtVolumenCamion = new System.Windows.Forms.TextBox();
             this.txtCapacidadCamion = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtModelo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtMatricula = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,6 +59,7 @@
             this.clmModelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cblCapacidadKg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmCapacidadM3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbxModelo = new System.Windows.Forms.ComboBox();
             this.pnlCrearCamion.SuspendLayout();
             this.pnlAplicarCamion.SuspendLayout();
             this.pnlEliminarCamion.SuspendLayout();
@@ -121,13 +121,6 @@
             this.label5.Size = new System.Drawing.Size(95, 17);
             this.label5.TabIndex = 19;
             this.label5.Text = "Capacidad (Kg):";
-            // 
-            // txtModelo
-            // 
-            this.txtModelo.Location = new System.Drawing.Point(80, 82);
-            this.txtModelo.Name = "txtModelo";
-            this.txtModelo.Size = new System.Drawing.Size(109, 20);
-            this.txtModelo.TabIndex = 16;
             // 
             // label3
             // 
@@ -368,10 +361,21 @@
             this.clmCapacidadM3.Name = "clmCapacidadM3";
             this.clmCapacidadM3.ReadOnly = true;
             // 
+            // cbxModelo
+            // 
+            this.cbxModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxModelo.FormattingEnabled = true;
+            this.cbxModelo.Location = new System.Drawing.Point(80, 82);
+            this.cbxModelo.Name = "cbxModelo";
+            this.cbxModelo.Size = new System.Drawing.Size(109, 21);
+            this.cbxModelo.TabIndex = 59;
+            this.cbxModelo.DropDown += new System.EventHandler(this.cbxModelo_DropDown);
+            // 
             // Camiones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbxModelo);
             this.Controls.Add(this.tblCamiones);
             this.Controls.Add(this.txtConfirmarCamion);
             this.Controls.Add(this.cbxEliminarCamion);
@@ -392,7 +396,6 @@
             this.Controls.Add(this.txtVolumenCamion);
             this.Controls.Add(this.txtCapacidadCamion);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtModelo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtMatricula);
             this.Controls.Add(this.label2);
@@ -419,7 +422,6 @@
         private System.Windows.Forms.TextBox txtVolumenCamion;
         private System.Windows.Forms.TextBox txtCapacidadCamion;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtModelo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMatricula;
         private System.Windows.Forms.Label label2;
@@ -445,5 +447,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmModelo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cblCapacidadKg;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmCapacidadM3;
+        private System.Windows.Forms.ComboBox cbxModelo;
     }
 }

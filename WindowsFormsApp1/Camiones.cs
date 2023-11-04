@@ -36,14 +36,18 @@ namespace WindowsFormsApp1
                 {
                     await db_conn.OpenAsync();
                     var command = new MySqlCommand(null, db_conn);
-                    command.CommandText = $@"insert into proyecto.camion values ('{txtMatricula.Text}', {txtModelo.Text}, {txtCapacidadCamion.Text}, {txtVolumenCamion.Text})";
+                    command.CommandText = $@"insert into proyecto.camion
+                                            values ('{txtMatricula.Text}',
+                                                (select idmodelo from proyecto.modelo where nombre='{cbxModelo.SelectedItem.ToString()}'),
+                                                {txtCapacidadCamion.Text},
+                                                {txtVolumenCamion.Text})";
                     await command.ExecuteNonQueryAsync();
                     UpdateTable();
                     MessageBox.Show("Camión creado con éxito");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al intentar crear el camión");
+                    MessageBox.Show("Error al intentar crear el camión" + ex.ToString());
                 }
                 finally
                 {
@@ -191,6 +195,33 @@ namespace WindowsFormsApp1
                     while (reader.Read())
                     {
                         tblCamiones.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetInt32(2).ToString(), reader.GetInt32(3).ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    await db_conn.CloseAsync();
+                }
+            }
+        }
+
+        private async void cbxModelo_DropDown(object sender, EventArgs e)
+        {
+            using (var db_conn = new MySqlConnection("Host=127.0.0.1;User=root;Password=porfavorentrar"))
+            {
+                try
+                {
+                    await db_conn.OpenAsync();
+                    var command = new MySqlCommand(null, db_conn);
+                    command.CommandText = $"select nombre from proyecto.modelo";
+                    var reader = await command.ExecuteReaderAsync();
+                    cbxModelo.Items.Clear();
+                    while (reader.Read())
+                    {
+                        cbxModelo.Items.Add(reader.GetString(0));
                     }
                 }
                 catch (Exception ex)
