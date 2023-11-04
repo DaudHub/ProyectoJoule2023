@@ -42,7 +42,7 @@ public class MyController : Controller {
                                     inner join proyecto.lote on cargalote.idlote=lote.idlote
                                     inner join proyecto.loteenvio on cargalote.idlote=loteenvio.idlote
                                     inner join proyecto.lugarenvio on loteenvio.idlugarenvio=lugarenvio.idlugarenvio
-                                    where matricula='{plate}' and usuario='{auth.User}' and fechasalida='{truckDepartureDate}'";
+                                    where matricula='{plate}' and usuario='{auth.User}' and fechasalida='{truckDepartureDate}' and idestado!=3";
             reader = command.ExecuteReader();
             var bundlesInTruck = new List<dynamic>();
             while (reader.Read()) {
