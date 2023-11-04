@@ -182,7 +182,7 @@ public class MyController : Controller {
                 message = "the user is not driving a truck"
             };
             reader.Close();
-            command.CommandText = @$"update loteenvio set idestado=3 where idlote={arg.Element}";
+            command.CommandText = @$"update proyecto.loteenvio set idestado=3 where idlote={arg.Element}";
             command.ExecuteNonQuery();
             return new {
                 success = true,
