@@ -201,7 +201,7 @@ public class MyController : Controller {
         }
     }
 
-    [HttpGet]
+    [HttpPost]
     [Route("map")]
     public ContentResult GetMap([FromBody] float[][] coordinates, float x, float y)  {
         try {
