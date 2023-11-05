@@ -201,8 +201,6 @@ public class MyController : Controller {
         }
     }
 
-
-
     [HttpGet]
     [Route("map")]
     public ContentResult GetMap([FromBody] float[][] coordinates, float x, float y)  {
@@ -212,27 +210,30 @@ public class MyController : Controller {
             <html>
             <head>
                 <title>Route Map</title>
-                <link rel='stylesheet' href='ttps://unpkg.com/leaflet@1.7.1/dist/leaflet.css' />
+                <link rel='stylesheet' href='ttps://unpkg.com/leaflet@1.7.1/dist/leaflet.css'
+                integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=='
+                crossorigin='' />
                 <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'></script>
             </head>
             <body>
                 <div id='map' style='height: 500px;'></div>
                 <script>
-                    const map = L.map('map').setView([{x}, {y}], 13)
+                    const map = L.map('map').setView([{x.ToString()}, {y.ToString()}], 13)" + @"
 
-                    L.tileLayer('https://a.tile.openstreetmap.org/15/{x}/{y}.png'," + @"{
+                    L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'," + @"{
                         maxZoom: 19,
+                        attribution: '&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>''
                     }).addTo(map)
 
-                function drawRoute(routeData) {
-                    const coordinates = routeData.coordinates
-                    const routePolyline = L.polyline(coordinates, { color: 'blue' }).addTo(map)
-                    map.fitBounds(routePolyline.getBounds())
-                } 
-                const routeData = {
-                    coordinates:" + @$"[ {JsonConvert.SerializeObject(coordinates)} ]" + @"
-                }
-                drawRoute(routeData)
+                    function drawRoute(routeData) {
+                        const coordinates = routeData.coordinates
+                        const routePolyline = L.polyline(coordinates, { color: 'blue' }).addTo(map)
+                        map.fitBounds(routePolyline.getBounds())
+                    } 
+                    const routeData = {
+                        coordinates:" + @$" {JsonConvert.SerializeObject(coordinates)} " + @"
+                    }
+                    drawRoute(routeData)
                 </script>
             </body>
             </html>
