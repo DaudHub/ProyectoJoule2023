@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "Rt8b3D5xr1qYpTWihwsic6KHMhg8EnjXsEtROWizkTFfJx+gqLPdLWxyUZ8Kpl6Dpy25n3pNubLl9C4E3MhVvQ==",
+  "dgSpecHash": "DzBOaTRRsd+XwJDWQ80J5af9c55r0/QeIAPaZCDIpItIwy6F31crGBAVzVRX+bCKe+76qbsEAXjD0QK0BJwypw==",
   "success": true,
-  "projectFilePath": "/Users/mdaud/Repositories/ProyectoJoule2023/ApiTransito/ApiTransito.csproj",
+  "projectFilePath": "C:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiTransito\\ApiTransito.csproj",
   "expectedPackageFiles": [
-    "/Users/mdaud/.nuget/packages/mysqlconnector/2.2.7/mysqlconnector.2.2.7.nupkg.sha512",
-    "/Users/mdaud/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\mateo\\.nuget\\packages\\mysqlconnector\\2.2.7\\mysqlconnector.2.2.7.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.2\\microsoft.netcore.app.ref.7.0.2.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.2\\microsoft.windowsdesktop.app.ref.7.0.2.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.2\\microsoft.aspnetcore.app.ref.7.0.2.nupkg.sha512",
+    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.2\\microsoft.netcore.app.host.win-x64.7.0.2.nupkg.sha512"
   ],
   "logs": []
 }

@@ -133,7 +133,7 @@ public class MyController : Controller {
                                     from proyecto.cargalote
                                         inner join proyecto.loteenvio on cargalote.idlote=loteenvio.idlote
                                         inner join proyecto.lugarenvio on proyecto.loteenvio.idlugarenvio=proyecto.lugarenvio.idlugarenvio
-                                    where matricula='{plate}' and usuario='{auth.User}' and fechasalida='{truckDepartureDate}'";
+                                    where matricula='{plate}' and usuario='{auth.User}' and fechasalida='{truckDepartureDate}' and idestado!=3";
             reader = command2.ExecuteReader();
             var coordinates = new List<(float, float)>();
             while (reader.Read()) {
@@ -206,35 +206,50 @@ public class MyController : Controller {
     public ContentResult GetMap([FromBody] float[][] coordinates, float x, float y)  {
         try {
             var result = new ContentResult();
-            string htmlContent = $@"
+            string htmlContent = @"
+            <!DOCTYPE html>
             <html>
             <head>
-                <title>Route Map</title>
-                <link rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css'
-                integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=='
-                crossorigin='' />
-                <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'></script>
+                <title>Bing Maps Route Example</title>
+                <meta charset='utf-8' />
+                <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AjVIkFx1Wg4hG7mYImVk4euyiXWwBkDGSj1yUTi6_Oq-eTC_03IxeWatzN8wItJ4'></script>
+                <style>
+                    #myMap {
+                        position: relative;
+                        width: 800px;
+                        height: 600px;
+                    }
+                    #directionsContainer {
+                        position: absolute;
+                        width: 250px;
+                        height: 100%;
+                    }
+                </style>
             </head>
             <body>
-                <div id='map' style='height: 500px;'></div>
+                <div id='myMap'></div>
+                <div id='directionsContainer'></div>
+
                 <script>
-                    const map = L.map('map').setView([{x.ToString()}, {y.ToString()}], 13)" + @"
+                    function loadMapScenario() {
+                        var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                            credentials: 'YOUR_API_KEY'
+                        });
 
-                    L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'," + @"{
-                        maxZoom: 19,
-                        attribution: '&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>''
-                    }).addTo(map)
+                        var startPoint = new Microsoft.Maps.Location(47.606209, -122.332069); // Seattle, WA
+                        var endPoint = new Microsoft.Maps.Location(34.052235, -118.243683); // Los Angeles, CA
 
-                    function drawRoute(routeData) {
-                        const coordinates = routeData.coordinates
-                        const routePolyline = L.polyline(coordinates, { color: 'blue' }).addTo(map)
-                        map.fitBounds(routePolyline.getBounds())
-                    } 
-                    const routeData = {
-                        coordinates:" + @$" {JsonConvert.SerializeObject(coordinates)} " + @"
+                        var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+                        directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
+                        directionsManager.addWaypoint(new Microsoft.Maps.Directions.Waypoint({ location: startPoint }));
+                        directionsManager.addWaypoint(new Microsoft.Maps.Directions.Waypoint({ location: endPoint }));
+
+                        directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('directionsContainer') });
+
+                        directionsManager.calculateDirections();
                     }
-                    drawRoute(routeData)
                 </script>
+                <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMapScenario' async defer></script>
             </body>
             </html>
             ";
