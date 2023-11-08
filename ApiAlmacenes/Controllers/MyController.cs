@@ -99,6 +99,74 @@ public class MyController : Controller {
     }
 
     [HttpPost]
+    [Route("packages")]
+    public dynamic GetAllPackages(Verification auth) {
+        try {
+            db_conn.Open();
+            if (!VerifyCredentials(auth)) return new {
+                success = false,
+                message = "authentication error"
+            };
+            var command = new MySqlCommand(null, db_conn);
+            command.CommandText = $@"select paquete.idpaquete, paquete.comentarios, paquete.pesokg, paquete.volumenm3, paquete.usuario, paquete.idestadofisico, paquete.usuarioestado
+                        from proyecto.paquete
+                            inner join proyecto.lotepaquete
+                                on paquete.idpaquete=lotepaquete.idpaquete
+                            inner join proyecto.lote
+                                on lotepaquete.idlote=lote.idlote
+                        where lote.idlugarenvio=(select idlugarenvio from proyecto.almacenero where almacenero.usuario='{auth.User}')";
+            var reader = command.ExecuteReader();
+            var packages = new List<Package>();
+            List<string> characteristics;
+            MySqlDataReader reader2;
+            using (var db_conn2 = new MySqlConnection("Server=127.0.0.1;User ID=apialmacen;Password=urbgieubgiutg98rtygtgiurnindg8958y")) {
+                db_conn2.Open();
+                var command2 = new MySqlCommand(null, db_conn2);
+                while (reader.Read()) {
+                    characteristics = new List<string>();
+                    command2.CommandText = @$"select caracteristicas.nombre
+                                            from proyecto.paquetecaracteristicas
+                                                inner join proyecto.caracteristicas
+                                                    on paquetecaracteristicas.idcaracteristica=caracteristicas.idcaracteristica
+                                            where paquetecaracteristicas.idpaquete={reader.GetInt32(0)}";
+                    reader2 = command2.ExecuteReader();
+                    while (reader2.Read()) {
+                        characteristics.Add(reader2.GetString(0));
+                    }
+                    reader2.Close();
+                    packages.Add(new Package() {
+                        ID = reader.GetInt32(0),
+                        Comments = reader.GetString(1),
+                        Weight_Kg = reader.GetDecimal(2),
+                        Volume_m3 = reader.GetDecimal(3),
+                        User = reader.GetString(4),
+                        PhysicalState = reader.GetInt32(5),
+                        StateUser = reader.GetString(6),
+                        Characteristics = characteristics
+                    });
+                }
+            }
+            reader.Close();
+            return new {
+                success = true,
+                message = "packages retrieved successfully",
+                packages = packages.ToArray()
+            };
+            
+        }
+        catch (Exception e) {
+            return new {
+                success = false,
+                message = "error while retrieving packages",
+                exception = e.ToString()
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
+
+    [HttpPost]
     [Route("newbundle")]
     public dynamic CreateBundle([FromBody] VerifCouple<Bundle> arg) {
         try{
