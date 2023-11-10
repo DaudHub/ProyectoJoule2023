@@ -275,7 +275,7 @@ public class MyController : Controller {
             command.CommandText = 
                 @$"select proyecto.usuario.usuario, proyecto.usuario.idrol 
                 from proyecto.usuario inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario 
-                where tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
+                where usuario.usuario='{ver.User}' and tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
             while (reader.Read()) {
@@ -297,7 +297,7 @@ public class MyController : Controller {
             command.CommandText = 
                 @$"select proyecto.usuario.usuario, proyecto.usuario.idrol 
                 from proyecto.usuario inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario 
-                where tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
+                where usuario.usuario='{ver.User}' and tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
             while (reader.Read()) {

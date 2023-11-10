@@ -50,7 +50,7 @@ public class MyController : Controller {
         }
     }
     
-    [HttpGet]
+    [HttpPost]
     [Route("getpackage")]
     public dynamic GetPackageByID([FromBody] VerifCouple<int> arg) {
         try {
@@ -60,27 +60,42 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             MySqlCommand command = new (null, db_conn);
-            var package = new Package();
-            command.CommandText= $@"select * from proyecto.paquetecaracteristicas where idpaquete={arg.Element}";
+            var characteristics = new List<string>();
+            command.CommandText= $@"select caracteristicas.nombre from proyecto.paquetecaracteristicas
+                                        inner join proyecto.caracteristicas
+                                            on caracteristicas.idcaracteristica=paquetecaracteristicas.idcaracteristica
+                                    where idpaquete={arg.Element}";
             var reader = command.ExecuteReader();
             while (reader.Read()){
-                for (int i = 0; i < reader.FieldCount; i++) {
-                    package.Characteristics.Add(reader.GetString(i));
-                }
+                characteristics.Add(reader.GetString(0));
             }
             reader.Close();
-            command.CommandText = $@"select comentarios, pesokg, volumenm3, usuario, estadofisico, usuarioestado from proyecto.paquete where idpaquete={arg.Element}";
+            command.CommandText = $@"select comentarios, pesokg, volumenm3, paquete.usuario, nombreestadofisico, usuarioestado 
+                                    from proyecto.paquete
+                                        inner join proyecto.estadofisico
+                                            on paquete.idestadofisico=estadofisico.idestadofisico
+                                        inner join proyecto.lotepaquete 
+                                            on paquete.idpaquete=lotepaquete.idpaquete
+                                        inner join proyecto.lote 
+                                            on lotepaquete.idlote=lote.idlote
+                                        inner join proyecto.almacenero on lote.idlugarenvio=almacenero.idlugarenvio
+                                    where paquete.idpaquete={arg.Element} and almacenero.usuario='{arg.Credentials.User}'";
             reader = command.ExecuteReader();
             reader.Read();
             if (!reader.HasRows) return new {
                 success = false,
                 message = "non-existing package"
             };
-            package.ID = arg.Element;
-            package.Comments = reader.GetString(0);
-            package.Weight_Kg = (decimal) reader.GetValue(1);
-            package.Volume_m3 = (decimal) reader.GetValue(2);
-            package.User = reader.GetString(3);
+            var package = new {
+                id = arg.Element,
+                comments = reader.GetString(0),
+                weight_Kg = reader.GetDecimal(1),
+                volume_m3 = reader.GetDecimal(2),
+                user = reader.GetString(3),
+                physicalState = reader.GetString(4),
+                stateUser = reader.GetString(5),
+                characteristics = characteristics
+            };
             return new {
                 success = true,
                 package = package
@@ -108,15 +123,18 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             var command = new MySqlCommand(null, db_conn);
-            command.CommandText = $@"select paquete.idpaquete, paquete.comentarios, paquete.pesokg, paquete.volumenm3, paquete.usuario, paquete.idestadofisico, paquete.usuarioestado
+            command.CommandText = $@"select paquete.idpaquete, paquete.comentarios, paquete.pesokg, paquete.volumenm3, paquete.usuario, estadofisico.nombreestadofisico, paquete.usuarioestado
                         from proyecto.paquete
                             inner join proyecto.lotepaquete
                                 on paquete.idpaquete=lotepaquete.idpaquete
                             inner join proyecto.lote
                                 on lotepaquete.idlote=lote.idlote
+                            inner join proyecto.lugarenvio
+                                on lote.idlugarenvio=lugarenvio.idlugarenvio
+                            inner join proyecto.estadofisico on paquete.idestadofisico=estadofisico.idestadofisico
                         where lote.idlugarenvio=(select idlugarenvio from proyecto.almacenero where almacenero.usuario='{auth.User}')";
             var reader = command.ExecuteReader();
-            var packages = new List<Package>();
+            var packages = new List<dynamic>();
             List<string> characteristics;
             MySqlDataReader reader2;
             using (var db_conn2 = new MySqlConnection("Server=127.0.0.1;User ID=apialmacen;Password=urbgieubgiutg98rtygtgiurnindg8958y")) {
@@ -134,13 +152,13 @@ public class MyController : Controller {
                         characteristics.Add(reader2.GetString(0));
                     }
                     reader2.Close();
-                    packages.Add(new Package() {
+                    packages.Add(new {
                         ID = reader.GetInt32(0),
                         Comments = reader.GetString(1),
                         Weight_Kg = reader.GetDecimal(2),
                         Volume_m3 = reader.GetDecimal(3),
                         User = reader.GetString(4),
-                        PhysicalState = reader.GetInt32(5),
+                        PhysicalState = reader.GetString(5),
                         StateUser = reader.GetString(6),
                         Characteristics = characteristics
                     });
@@ -333,15 +351,20 @@ public class MyController : Controller {
         if (db_conn.State == ConnectionState.Closed)
             db_conn.Open();
         var command = new MySqlCommand(null, db_conn);
-        command.CommandText = @$"select proyecto.almacenero.idlugarenvio from proyecto.almacenero where usuario='{DepotManager}'";
+        command.CommandText = @$"select proyecto.almacenero.idlugarenvio
+                                from proyecto.almacenero
+                                    inner join proyecto.lote
+                                        on almacenero.idlugarenvio=lote.idlugarenvio
+                                where usuario='{DepotManager}' and lote.idlote={BundleID}";
         var reader = command.ExecuteReader();
-        reader.Read();
-        int lugarenvio = (int) reader.GetValue(0);
-        reader.Close();
-        command.CommandText = @$"select proyecto.lote.idlugarenvio from proyecto.lote where idlote={BundleID}";
-        reader = command.ExecuteReader();
-        reader.Read();
-        return ((int) reader.GetValue(0) == lugarenvio);
+        if (reader.Read()) {
+            reader.Close();
+            return true;
+        }
+        else {
+            reader.Close();
+            return false;
+        } 
     }
 
     private bool HasDestination(int bundleID) {
@@ -363,7 +386,7 @@ public class MyController : Controller {
             @$"select proyecto.usuario.usuario, proyecto.rol.nombre
                 from proyecto.usuario inner join proyecto.tokens on proyecto.usuario.usuario=proyecto.tokens.usuario
                 inner join proyecto.rol on proyecto.rol.idrol=proyecto.usuario.idrol
-                where tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
+                where usuario.usuario='{ver.User}' and tokn='{ver.Token}' and pwd='{MyEncryption.EncryptToString(ver.Password)}'";
             var reader = command.ExecuteReader();
             if (!reader.HasRows) return false;
             while (reader.Read()) {
