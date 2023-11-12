@@ -186,7 +186,7 @@ public class MyController : Controller {
 
     [HttpPost]
     [Route("newbundle")]
-    public dynamic CreateBundle([FromBody] VerifCouple<Bundle> arg) {
+    public dynamic CreateBundle([FromBody] VerifCouple<int> arg) {
         try{
             db_conn.Open();
             if (!VerifyCredentials(arg.Credentials)) return new {
@@ -195,7 +195,7 @@ public class MyController : Controller {
             };
             MySqlCommand command = new (null, db_conn);
             command.CommandText = @$"insert into proyecto.lote (idlote, idlugarenvio)
-                values ({arg.Element.ID}, {arg.Element.Deposit})";
+                values ({arg.Element}, (select idlugarenvio from proyecto.almacenero where usuario='{arg.Credentials.User}'))";
             command.ExecuteNonQuery();
             return new {
                 success = true,
@@ -206,6 +206,115 @@ public class MyController : Controller {
             return new {
                 success = false,
                 message = "error while creating bundle",
+                exception = e.ToString()
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
+
+    [HttpPost]
+    [Route("bundles")]
+    public dynamic GetBundles(Verification ver) {
+        try {
+            db_conn.Open();
+            if (!VerifyCredentials(ver)) return new {
+                success = false,
+                message = "authentication error"
+            };
+            var command = new MySqlCommand(null, db_conn);
+            command.CommandText = $@"select lote.* 
+                                    from proyecto.lote
+                                        inner join proyecto.almacenero
+                                            on lote.idlugarenvio=almacenero.idlugarenvio
+                                    where almacenero.usuario='{ver.User}'";
+            var reader = command.ExecuteReader();
+            var bundles = new List<dynamic>();
+            while (reader.Read()) {
+                bundles.Add(new {bundleID = reader.GetInt32(0), depositID = reader.GetInt32(1)});
+            }
+            return new {
+                success = true,
+                message = "bundles retrieved successfully",
+                bundles = bundles
+            };
+        }
+        catch (Exception ex) {
+            return new {
+                success = false,
+                message = "exception while retrieving bundles",
+                exeption = ex.ToString()
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
+
+    [HttpPost]
+    [Route("packagesinbundle")]
+    public dynamic GetPackagesInBundle(VerifCouple<int> arg) {
+        try {
+            db_conn.Open();
+            if (!VerifyCredentials(arg.Credentials)) return new {
+                success = false,
+                message = "authentication error"
+            };
+            var command = new MySqlCommand(null, db_conn);
+            command.CommandText = $@"select paquete.idpaquete, paquete.comentarios, paquete.pesokg, paquete.volumenm3, paquete.usuario, estadofisico.nombreestadofisico, paquete.usuarioestado
+                        from proyecto.paquete
+                            inner join proyecto.lotepaquete
+                                on paquete.idpaquete=lotepaquete.idpaquete
+                            inner join proyecto.lote
+                                on lotepaquete.idlote=lote.idlote
+                            inner join proyecto.lugarenvio
+                                on lote.idlugarenvio=lugarenvio.idlugarenvio
+                            inner join proyecto.estadofisico on paquete.idestadofisico=estadofisico.idestadofisico
+                        where lote.idlugarenvio=(select idlugarenvio from proyecto.almacenero where almacenero.usuario='{arg.Credentials.User}') and lote.idlote={arg.Element}";
+            var reader = command.ExecuteReader();
+            var packages = new List<dynamic>();
+            List<string> characteristics;
+            MySqlDataReader reader2;
+            using (var db_conn2 = new MySqlConnection("Server=127.0.0.1;User ID=apialmacen;Password=urbgieubgiutg98rtygtgiurnindg8958y")) {
+                db_conn2.Open();
+                var command2 = new MySqlCommand(null, db_conn2);
+                while (reader.Read()) {
+                    characteristics = new List<string>();
+                    command2.CommandText = @$"select caracteristicas.nombre
+                                            from proyecto.paquetecaracteristicas
+                                                inner join proyecto.caracteristicas
+                                                    on paquetecaracteristicas.idcaracteristica=caracteristicas.idcaracteristica
+                                            where paquetecaracteristicas.idpaquete={reader.GetInt32(0)}";
+                    reader2 = command2.ExecuteReader();
+                    while (reader2.Read()) {
+                        characteristics.Add(reader2.GetString(0));
+                    }
+                    reader2.Close();
+                    packages.Add(new {
+                        ID = reader.GetInt32(0),
+                        Comments = reader.GetString(1),
+                        Weight_Kg = reader.GetDecimal(2),
+                        Volume_m3 = reader.GetDecimal(3),
+                        User = reader.GetString(4),
+                        PhysicalState = reader.GetString(5),
+                        StateUser = reader.GetString(6),
+                        Characteristics = characteristics
+                    });
+                }
+            }
+            reader.Close();
+            return new {
+                success = true,
+                message = "packages retrieved successfully",
+                packages = packages.ToArray()
+            };
+            
+        }
+        catch (Exception e) {
+            return new {
+                success = false,
+                message = "error while retrieving packages",
                 exception = e.ToString()
             };
         }
