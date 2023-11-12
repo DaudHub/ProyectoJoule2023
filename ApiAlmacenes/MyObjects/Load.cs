@@ -5,6 +5,5 @@ namespace ApiAlmacenes {
         public int Bundle { get; set; }
         public string Plate { get; set; }
         public string User { get; set; }
-        public string Departure_Date { get; set; }
     }
 }

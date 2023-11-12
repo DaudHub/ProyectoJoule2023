@@ -405,7 +405,7 @@ public class MyController : Controller {
             };
             MySqlCommand command = new (null, db_conn);
             command.CommandText = @$"insert into proyecto.cargalote
-                values ({arg.Element.Bundle}, '{arg.Element.User}', '{arg.Element.Plate}','{arg.Element.Departure_Date}')";
+                values ({arg.Element.Bundle}, '{arg.Element.User}', '{arg.Element.Plate}', (select fechasalida from proyecto.conduce where usuario='{arg.Element.User}' and matricula='{arg.Element.Plate}' limit 1))";
             command.ExecuteNonQuery();
             return new {
                 success = true,
@@ -482,8 +482,14 @@ public class MyController : Controller {
         var command = new MySqlCommand(null, db_conn);
         command.CommandText = $"select proyecto.loteenvio.idlugarenvio from proyecto.loteenvio where idlote={bundleID}";
         var reader = command.ExecuteReader();
-        if(!reader.HasRows) return false;
-        else return true;
+        if(!reader.HasRows) {
+            reader.Close();
+            return false;
+        }
+        else {
+            reader.Close();
+            return true;
+        }
     }
 
     private bool VerifyCredentials(Verification ver) {
