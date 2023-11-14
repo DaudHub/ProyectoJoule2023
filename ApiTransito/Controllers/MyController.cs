@@ -78,22 +78,28 @@ public class MyController : Controller {
                 message = "authentication error"
             };
             var command = new MySqlCommand(null, db_conn);
-            command.CommandText = @$"select paquete.usuario, paquete.idpaquete, loteenvio.idestado, lotepaquete.idlote, cargalote.matricula, cargalote.usuario, loteenvio.fechaestimada
+            command.CommandText = @$"select paquete.idpaquete, loteenvio.idestado, lotepaquete.idlote, cargalote.matricula, cargalote.usuario, loteenvio.fechaestimada
                                     from proyecto.paquete
-                                        inner join proyecto.lotepaquete on paquete.idpaquete=lotepaquete.idpaquete
+                                        left join proyecto.lotepaquete on paquete.idpaquete=lotepaquete.idpaquete
                                         left join proyecto.cargalote on lotepaquete.idlote=cargalote.idlote
                                         left join proyecto.loteenvio on lotepaquete.idlote=loteenvio.idlote
                                     where paquete.usuario='{auth.User}'";
             var reader = command.ExecuteReader();
             var packages = new List<dynamic>();
             while (reader.Read()) {
-                packages.Add(new {ID = reader.GetInt32(0), comments = reader.GetString(1), weight = reader.GetInt32(2), volume = reader.GetInt32(3), state = reader.GetString(4)});
+                packages.Add(new {ID = reader.GetInt32(0),
+                    state = reader.GetValue(1) is DBNull ? null : (object) reader.GetInt32(1).ToString(),
+                    bundle = reader.GetValue(2) is DBNull ? null :(object) reader.GetInt32(2).ToString(),
+                    truck = reader.GetValue(3) is DBNull ? null : (object) reader.GetString(3),
+                    driver = reader.GetValue(4) is DBNull ? null : (object) reader.GetString(4),
+                    date = reader.GetValue(5) is DBNull ? null : (object) reader.GetDateTime(5).ToString()
+                });
             }
             reader.Close();
             return new {
                 success = true,
                 message = "packages retrieved successfully",
-                packages = packages.ToArray()
+                packages = packages
             };
         }
         catch (Exception e) {

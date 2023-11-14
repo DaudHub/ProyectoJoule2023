@@ -1,14 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "9V4u1natMEC3zyJVYRZ9kDvzSMqZvWQscw6skvKRxPU6d11b3M/PhqnJ0bo4Yhy/aorKAw9UcrlIOjVLXGteTw==",
+  "dgSpecHash": "Hu1s3H7shZdO+N/IF8C880WGfbmBR9R2ac6Jgj6+u/VnAuYxiVHHv1vGGguGWB1VIlu8pEXRev5c3UyNnCWEMA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mateo\\source\\repos\\DaudHub\\ProyectoJoule2023\\ApiAcceso\\RestAPI.csproj",
+  "projectFilePath": "C:\\Users\\treyn\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiAcceso\\RestAPI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\mateo\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512",
-    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.2\\microsoft.netcore.app.ref.7.0.2.nupkg.sha512",
-    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.2\\microsoft.windowsdesktop.app.ref.7.0.2.nupkg.sha512",
-    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.2\\microsoft.aspnetcore.app.ref.7.0.2.nupkg.sha512",
-    "C:\\Users\\mateo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.2\\microsoft.netcore.app.host.win-x64.7.0.2.nupkg.sha512"
+    "C:\\Users\\treyn\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512"
   ],
   "logs": []
 }
