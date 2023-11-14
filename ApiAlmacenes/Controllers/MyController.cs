@@ -447,8 +447,45 @@ public class MyController : Controller {
         catch(Exception e) {
             return new {
                 success = false,
-                message = "error",
+                message = "error while obtaining places",
                 exception = e.ToString()
+            };
+        }
+        finally {
+            db_conn.Close();
+        }
+    }
+
+    [HttpPost]
+    [Route("places")]
+    public dynamic GetPlaces(Verification ver) {
+        try {
+            db_conn.Open();
+            if (!VerifyCredentials(ver)) return new {
+                success = false,
+                message = "authentication error"
+            };
+            var command = new MySqlCommand(null, db_conn);
+            command.CommandText = $@"select lugarenvio.idlugarenvio
+                                    from proyecto.lugarenvio
+                                        left join proyecto.almacenero
+                                            on lugarenvio.idlugarenvio=almacenero.idlugarenvio
+                                    where almacenero.usuario!='{ver.User}' or almacenero.usuario is null";
+            var reader = command.ExecuteReader();
+            var places = new List<int>();
+            while (reader.Read()) {
+                places.Add(reader.GetInt32(0));
+            }
+            return new {
+                success = true,
+                places = places
+            };
+        }
+        catch (Exception ex) {
+            return new {
+                success = false,
+                message = "error while obtaining places",
+                exception = ex.ToString()
             };
         }
         finally {
