@@ -439,6 +439,7 @@ public class MyController : Controller {
             };
             var command = new MySqlCommand(null, db_conn);
             command.CommandText = @$"insert into proyecto.loteenvio values ({arg.Element.BundleID}, '{arg.Element.Destination}', '{arg.Element.EstimatedDate}', {arg.Element.StateID})";
+            command.ExecuteNonQuery();
             return new {
                 success=true,
                 message="bundle due sending"
