@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "rLK6RACvFV7Ru3ZpZl3p3niXq1+YJm8IQXkeOV+jWA4NCe31QmdSesmXv/+QXBZGsqPOZDiGpWlSVxE1STgLrA==",
+  "dgSpecHash": "WQLYk3E3sWsQHRxziyRDnf7YsXgmEUPFoKnWaaIDtXdrFOA+hBYZ01NtIR3EQE7degklJfhs8beyj8QchKwFQQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\treyn\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiTransito\\ApiTransito.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiTransito\\ApiTransito.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\treyn\\.nuget\\packages\\mysqlconnector\\2.2.7\\mysqlconnector.2.2.7.nupkg.sha512",
-    "C:\\Users\\treyn\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\Usuario\\.nuget\\packages\\mysqlconnector\\2.2.7\\mysqlconnector.2.2.7.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

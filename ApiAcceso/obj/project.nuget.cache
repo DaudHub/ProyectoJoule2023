@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Hu1s3H7shZdO+N/IF8C880WGfbmBR9R2ac6Jgj6+u/VnAuYxiVHHv1vGGguGWB1VIlu8pEXRev5c3UyNnCWEMA==",
+  "dgSpecHash": "nxzS4l+AvOreDuSZ2QSF1p4qm0At4SCBZQz0HhvRslslwWAxDn0ghx37g1Lx1E5652DQ0r9m0yXoLKv8FWY3Vw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\treyn\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiAcceso\\RestAPI.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiAcceso\\RestAPI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\treyn\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512"
+    "C:\\Users\\Usuario\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512"
   ],
   "logs": []
 }

@@ -96,19 +96,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\treyn\\.nuget\\packages\\": {}
+    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\treyn\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiTransito\\ApiTransito.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiTransito\\ApiTransito.csproj",
       "projectName": "ApiTransito",
-      "projectPath": "C:\\Users\\treyn\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiTransito\\ApiTransito.csproj",
-      "packagesPath": "C:\\Users\\treyn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\treyn\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiTransito\\obj\\",
+      "projectPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiTransito\\ApiTransito.csproj",
+      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GitHub\\ProyectoJoule2023\\ApiTransito\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\treyn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -162,7 +167,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
