@@ -39,9 +39,9 @@ namespace WindowsFormsApp1
                     await db_conn.OpenAsync();
                     var command = new MySqlCommand(null, db_conn);
                     command.CommandText = $@"start transaction;
-                    insert ignore into proyecto.lugarenvio values
+                    insert ignore into proyecto.lugarenvio (idlugarenvio, latitud, longitud, calle, numeropuerta) values
                     ({txtID.Text}, {txtLatitud.Text}, {txtLongitud.Text}, '{txtCalle.Text}', {txtNumeroPuerta.Text});
-                    insert into proyecto.almacen values
+                    insert into proyecto.almacen (idlugarenvio, capacidadkg, volumenm3) values
                     ({txtID.Text}, {txtCapacidadKg.Text}, {txtCapacidadm3.Text});
                     commit";
                     await command.ExecuteNonQueryAsync();
