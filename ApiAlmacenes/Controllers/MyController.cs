@@ -433,7 +433,7 @@ public class MyController : Controller {
                 success = false,
                 message = "authentication error"
             };
-            if (IsBundleInDepot(arg.Credentials.User, arg.Element.BundleID)) return new {
+            if (!IsBundleInDepot(arg.Credentials.User, arg.Element.BundleID)) return new {
                 success = false,
                 message = "permission denied (bundle is not in the depot associated to this user)"
             };
